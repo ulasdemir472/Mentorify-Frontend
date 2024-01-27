@@ -74,15 +74,15 @@ const CTA = () => {
           <li className="hidden lg:block mx-auto">
             <picture className="max-w-screen-lg">
               <source
-                srcset="https://cdn.mentorcruise.com/img/home/screenshots/chat-screen_2x.webp"
+                srcSet="https://cdn.mentorcruise.com/img/home/screenshots/chat-screen_2x.webp"
                 type="image/webp"
               />
               <source
-                srcset="https://cdn.mentorcruise.com/img/home/screenshots/chat-screen_2x.png"
+                srcSet="https://cdn.mentorcruise.com/img/home/screenshots/chat-screen_2x.png"
                 type="image/png"
               />
               <source
-                srcset="https://cdn.mentorcruise.com/img/home/screenshots/chat-screen_1x.webp"
+                srcSet="https://cdn.mentorcruise.com/img/home/screenshots/chat-screen_1x.webp"
                 className="image-enhancer"
                 type="image/webp"
               />
@@ -96,15 +96,15 @@ const CTA = () => {
           <li className="hidden lg:block mx-auto max-w-lg">
             <picture className="max-w-screen-lg">
               <source
-                srcset="https://cdn.mentorcruise.com/img/home/screenshots/conversation_2x.webp 2x"
+                srcSet="https://cdn.mentorcruise.com/img/home/screenshots/conversation_2x.webp 2x"
                 type="image/webp"
               />
               <source
-                srcset="https://cdn.mentorcruise.com/img/home/screenshots/conversation_2x.png 2x"
+                srcSet="https://cdn.mentorcruise.com/img/home/screenshots/conversation_2x.png 2x"
                 type="image/png"
               />
               <source
-                srcset="https://cdn.mentorcruise.com/img/home/screenshots/conversation_1x.webp"
+                srcSet="https://cdn.mentorcruise.com/img/home/screenshots/conversation_1x.webp"
                 className="image-enhancer"
                 type="image/webp"
               />
@@ -144,19 +144,19 @@ const CTA = () => {
                   <div className="flex items-center space-x-4">
                     <picture className="flex items-center max-w-screen-lg w-12 h-12">
                       <source
-                        srcset="https://cdn.mentorcruise.com/img/faces/tomray_2x.webp 2x"
+                        srcSet="https://cdn.mentorcruise.com/img/faces/tomray_2x.webp 2x"
                         type="image/webp"
                         alt="Tom Ray"
                         className="rounded-full w-12 h-12"
                       />
                       <source
-                        srcset="https://cdn.mentorcruise.com/img/faces/tomray_2x.png 2x"
+                        srcSet="https://cdn.mentorcruise.com/img/faces/tomray_2x.png 2x"
                         type="image/png"
                         alt="Tom Ray"
                         className="rounded-full w-12 h-12"
                       />
                       <source
-                        srcset="https://cdn.mentorcruise.com/img/faces/tomray_1x.webp"
+                        srcSet="https://cdn.mentorcruise.com/img/faces/tomray_1x.webp"
                         type="image/webp"
                         alt="Tom Ray"
                         className="image-enhancer rounded-full w-12 h-12"

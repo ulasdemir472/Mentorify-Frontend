@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Logo from "@/public/logo.svg";
 
 const Header = () => {
   return (
@@ -9,7 +10,7 @@ const Header = () => {
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
             <Link href="#" aria-label="Home">
-              <Image src="/favicon.ico" width={25} height={25} alt="logo" />
+              <Image src={Logo} width={100} height={100} alt="logo" />
             </Link>
             <div className="hidden md:flex md:gap-x-6">
               <Link
