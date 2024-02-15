@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import GenericButton from "@/components/generic-button";
@@ -7,8 +7,19 @@ import TextInput from "@/components/inputs/text-input";
 import SelectCategory from "@/components/inputs/select-input";
 import TagsWithBadges from "@/components/inputs/tags-w-badges";
 import TextAreaInput from "@/components/inputs/text-area-input";
+import {
+  UserCircleIcon,
+  PlusCircleIcon,
+  XCircleIcon,
+} from "@heroicons/react/24/solid";
+import { toast } from "react-toastify";
+import handleFileChange from "@/lib/handle-file-change";
+import { useRouter } from "next/navigation";
 
 const MentorRegisterForm = ({ children }) => {
+  const [profilePhotoView, setProfilePhotoView] = useState(null);
+  const router = useRouter();
+
   const ValidationSchema = Yup.object().shape({
     username: Yup.string().required("Name is required"),
     surname: Yup.string().required("Surname is required"),
@@ -31,6 +42,7 @@ const MentorRegisterForm = ({ children }) => {
       category: "",
       subCategory: [],
       desc: "",
+      profilePic: undefined,
     },
     validationSchema: ValidationSchema,
     onSubmit: async (values) => {
@@ -52,8 +64,11 @@ const MentorRegisterForm = ({ children }) => {
       const data = await response.json();
       if (data.status === 200) {
         console.log(data);
+        toast.success("Registration successful", { autoClose: 500 });
+        router.push("/");
       } else {
         console.log(data);
+        toast.error("Registration failed", { autoClose: 500 });
       }
     } catch (error) {
       console.log(error);
@@ -65,6 +80,62 @@ const MentorRegisterForm = ({ children }) => {
       <div className="mx-auto w-full max-w-sm lg:w-96">
         <div>
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
+            <label htmlFor="profilePic" className="">
+              <p className="block text-sm font-medium leading-5 text-gray-700">
+                Profile Photo
+              </p>
+              {profilePhotoView ? (
+                <img
+                  src={profilePhotoView}
+                  alt="profile photo"
+                  className="w-36 h-36 rounded-full object-cover"
+                />
+              ) : (
+                <UserCircleIcon
+                  className="h-36 w-36 text-gray-300"
+                  aria-hidden="true"
+                />
+              )}
+              <input
+                type="file"
+                key={profilePhotoView}
+                onChange={async (e) => {
+                  const readFile = await handleFileChange(e.target.files[0]);
+                  readFile.file
+                    ? toast.success("Profile Photo uploaded successfully", {
+                        autoClose: 500,
+                      })
+                    : toast.error("Photo upload failed", { autoClose: 500 });
+
+                  setProfilePhotoView(readFile.previewImage);
+
+                  formik.setFieldValue("profilePic", readFile.file);
+                }}
+                accept="image/jpeg, image/png"
+                className="sr-only"
+                name="profilePic"
+                id="profilePic"
+              />
+              {!profilePhotoView && (
+                <PlusCircleIcon
+                  className="h-8 w-8 text-green-400"
+                  aria-hidden="true"
+                />
+              )}
+              {profilePhotoView && (
+                <XCircleIcon
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    setProfilePhotoView(null);
+
+                    formik.setFieldValue("profilePic", undefined);
+                  }}
+                  className="h-8 w-8 text-red-400"
+                  aria-hidden="true"
+                />
+              )}
+            </label>
             <TextInput formik={formik} name="username" label="Name" />
             {formik.errors[`username`] && formik.touched[`username`] && (
               <span className="error-message text-xs text-red-500">
