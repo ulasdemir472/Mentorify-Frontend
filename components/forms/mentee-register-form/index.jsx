@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import GenericButton from "@/components/generic-button";
 import TextInput from "@/components/inputs/text-input";
 import TextAreaInput from "@/components/inputs/text-area-input";
+import { toast } from "react-toastify";
 
 const MenteeRegisterForm = ({ children }) => {
   const ValidationSchema = Yup.object().shape({
@@ -51,8 +52,10 @@ const MenteeRegisterForm = ({ children }) => {
       const data = await response.json();
       if (data.status === 200) {
         console.log(data);
+        toast.success("Registration successful", { autoClose: 500 });
       } else {
         console.log(data);
+        toast.error("Registration failed", { autoClose: 500 });
       }
     } catch (error) {
       console.log(error);
