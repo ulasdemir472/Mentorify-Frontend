@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import GenericButton from "@/components/generic-button";
 
 const LoginForm = ({ children }) => {
   return (
     <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
       <div className="mx-auto w-full max-w-sm lg:w-96">
         <div>
-          <form action="#" method="POST" className="space-y-6">
+          <form className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -71,28 +72,28 @@ const LoginForm = ({ children }) => {
               </div>
             </div>
             <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
+              <GenericButton type="submit" className="w-full text-md">
+                Login
+              </GenericButton>
             </div>
           </form>
-          <div class="relative my-4" x-show="tab === 'mentee'">
-            <div class="absolute inset-0 flex items-center" aria-hidden="true">
-              <div class="w-full border-solid border-0 border-t border-gray-300"></div>
+          <div className="relative my-4" x-show="tab === 'mentee'">
+            <div
+              className="absolute inset-0 flex items-center"
+              aria-hidden="true"
+            >
+              <div className="w-full border-solid border-0 border-t border-gray-300"></div>
             </div>
 
-            <div class="relative flex justify-center text-gray-500">
-              <span class="px-2 bg-white">Or</span>
+            <div className="relative flex justify-center text-gray-500">
+              <span className="px-2 bg-white">Or</span>
             </div>
           </div>
           <a
-            class="white-btn small w-full text-center"
+            className="white-btn small w-full text-center"
             href="/auth/google/login/"
           >
-            <div class="mx-auto border-2 px-3 py-1.5 rounded-md">
+            <div className="mx-auto border-2 px-3 py-1.5 rounded-md">
               <Image
                 src="https://cdn.mentorcruise.com/img/logocloud/google-color.svg"
                 className="align-middle inline h-4 mr-2"
@@ -100,7 +101,7 @@ const LoginForm = ({ children }) => {
                 width={20}
                 height={20}
               />
-              <span class="text-gray-900 font-semibold">
+              <span className="text-gray-900 font-semibold">
                 Log in with Google
               </span>
             </div>

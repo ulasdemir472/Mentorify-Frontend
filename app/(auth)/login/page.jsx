@@ -77,7 +77,7 @@ const Login = () => {
                     </Link>
                     or
                     <Link
-                      href=""
+                      href="/register"
                       className=" text-indigo-700 font-semibold underline"
                     >
                       apply to be a mentor

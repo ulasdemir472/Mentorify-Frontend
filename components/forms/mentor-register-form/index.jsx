@@ -6,6 +6,7 @@ import GenericButton from "@/components/generic-button";
 import TextInput from "@/components/inputs/text-input";
 import SelectCategory from "@/components/inputs/select-input";
 import TagsWithBadges from "@/components/inputs/tags-w-badges";
+import TextAreaInput from "@/components/inputs/text-area-input";
 
 const MentorRegisterForm = ({ children }) => {
   const ValidationSchema = Yup.object().shape({
@@ -29,7 +30,7 @@ const MentorRegisterForm = ({ children }) => {
       password: "",
       category: "",
       subCategory: [],
-      photo: "",
+      desc: "",
     },
     validationSchema: ValidationSchema,
     onSubmit: async (values) => {
@@ -94,6 +95,12 @@ const MentorRegisterForm = ({ children }) => {
               formik={formik}
               label="Sub Category"
               placeholder="Select Sub Category"
+            />
+            <TextAreaInput
+              formik={formik}
+              name="desc"
+              label="Description"
+              placeholder="Talk about yourself..."
             />
             <GenericButton type="submit" className="w-full">
               Sign up
