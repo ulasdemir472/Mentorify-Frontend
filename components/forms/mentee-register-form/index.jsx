@@ -46,7 +46,12 @@ const MenteeRegisterForm = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          username: values.name,
+          email: values.email,
+          password: values.password,
+          desc: values.desc,
+        }),
       });
 
       const data = await response.json();

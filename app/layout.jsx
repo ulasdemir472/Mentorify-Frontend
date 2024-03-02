@@ -3,6 +3,7 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
     >
       <body className={inter.className}>
         <NextTopLoader color="yellow" height={5} crawl={true} />
-        <main> {children}</main>
+        <AuthProvider>
+          <main>{children}</main>
+        </AuthProvider>
         <ToastContainer position="top-center" newestOnTop />
       </body>
     </html>

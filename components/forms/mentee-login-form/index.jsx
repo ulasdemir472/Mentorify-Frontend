@@ -1,49 +1,92 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import GenericButton from "@/components/generic-button";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import TextInput from "@/components/inputs/text-input";
+import { authorize } from "@/lib/authorize";
+import { useAuth } from "@/contexts/AuthContext";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const LoginForm = ({ children }) => {
+  const { user, setIsAuthenticated, setUser } = useAuth();
+  const router = useRouter();
+
+  const ValidationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])/,
+        "Password must include at least one lowercase and one uppercase character"
+      )
+      .required("Password is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: ValidationSchema,
+    onSubmit: async (values) => {
+      login(values);
+    },
+  });
+
+  const login = async (values) => {
+    console.log(values);
+    try {
+      const response = await authorize(values);
+      if (response.status === 200) {
+        setIsAuthenticated(true);
+        setUser(response.user);
+        await Cookies.set("session-user", JSON.stringify(response.user));
+        toast.success("Login successful", { autoClose: 500 });
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log("USER ", user);
+    }
+  };
+
   return (
     <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
       <div className="mx-auto w-full max-w-sm lg:w-96">
         <div>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={formik.handleSubmit}>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <TextInput
+                formik={formik}
+                name="email"
+                label="Email"
+                id="email"
+              />
+              {formik.errors[`email`] && formik.touched[`email`] && (
+                <span className="error-message text-xs text-red-500">
+                  {String(formik.errors[`email`])}
+                </span>
+              )}
             </div>
 
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <TextInput
+                formik={formik}
+                name="password"
+                label="Password"
+                id="password"
+                type="password"
+              />
+              {formik.errors[`password`] && formik.touched[`password`] && (
+                <span className="error-message text-xs text-red-500">
+                  {String(formik.errors[`password`])}
+                </span>
+              )}
             </div>
 
             <div className="flex items-center justify-between">
