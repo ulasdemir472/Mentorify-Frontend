@@ -1,7 +1,24 @@
-import React from "react";
+"use client";
+import Cookies from "js-cookie";
+import Link from "next/link";
+import React, { useEffect } from "react";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  const user = Cookies.get("session-user") || "";
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  return (
+    <>
+      {user ? (
+        <div>Login başarılı</div>
+      ) : (
+        <Link href="/login">Lütfen giriş yapınız</Link>
+      )}
+    </>
+  );
 };
 
 export default Dashboard;

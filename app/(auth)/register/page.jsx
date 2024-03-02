@@ -21,12 +21,12 @@ const Register = () => {
           <div className="m-auto">
             <Link className="w-full" href="/" aria-label="Home">
               <Image
-                width={100}
-                height={100}
+                width={300}
+                height={300}
                 src={Logo}
                 priority={true}
                 alt="Mentorify Logo White"
-                className="bg-white rounded-full"
+                className="bg-white rounded-full aspect-auto"
               />
             </Link>
           </div>
