@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const LoginForm = ({ children }) => {
-  const { user, setIsAuthenticated, setUser } = useAuth();
+  const { user, setIsAuthenticated, setUser, token, setToken } = useAuth();
   const router = useRouter();
 
   const ValidationSchema = Yup.object().shape({
@@ -38,13 +38,15 @@ const LoginForm = ({ children }) => {
   });
 
   const login = async (values) => {
-    console.log(values);
     try {
       const response = await authorize(values);
+      console.log(response);
       if (response.status === 200) {
         setIsAuthenticated(true);
         setUser(response.user);
+        setToken(response.token);
         await Cookies.set("session-user", JSON.stringify(response.user));
+        await Cookies.set("token", JSON.stringify(response.token));
         toast.success("Login successful", { autoClose: 500 });
         router.push("/dashboard");
       }
@@ -52,6 +54,7 @@ const LoginForm = ({ children }) => {
       console.log(error);
     } finally {
       console.log("USER ", user);
+      console.log("TOKEN ", token);
     }
   };
 

@@ -9,6 +9,8 @@ export const AuthContext = createContext({
   setUser: (value) => {},
   loading: true,
   setLoading: (value) => {},
+  token: "",
+  setToken: (value) => {},
 });
 
 export const useAuth = () => {
@@ -22,13 +24,16 @@ export const AuthProvider = ({ children }) => {
       ? JSON.parse(Cookies.get("session-user"))
       : {}
   );
+  const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = Cookies.get("session-user");
-    if (storedUser !== undefined) {
+    const storedToken = Cookies.get("token");
+    if ((storedUser && storedToken) !== undefined) {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
+      setToken(storedToken);
       setIsAuthenticated(true);
       console.log("AUTH USER: ", user);
     }
@@ -42,6 +47,8 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated,
         user,
         setUser,
+        token,
+        setToken,
         loading,
         setLoading,
       }}
