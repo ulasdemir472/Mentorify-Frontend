@@ -17,13 +17,8 @@ const LoginForm = ({ children }) => {
 
   const ValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])/,
-        "Password must include at least one lowercase and one uppercase character"
-      )
-      .required("Password is required"),
+    password: Yup.string().required("Password is required"),
+    //.min(8, "Password must be at least 8 characters").matches(/^(?=.*[a-z])(?=.*[A-Z])/, "Password must include at least one lowercase and one uppercase character")
   });
 
   const formik = useFormik({
@@ -41,7 +36,7 @@ const LoginForm = ({ children }) => {
     try {
       const response = await authorize(values);
       console.log(response);
-      if (response.status === 200) {
+      if (response.status) {
         setIsAuthenticated(true);
         setUser(response.user);
         setToken(response.token);
