@@ -35,7 +35,7 @@ const MentorRegisterForm = ({ children }) => {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
+      name:"",
       surname: "",
       email: "",
       password: "",
@@ -53,11 +53,13 @@ const MentorRegisterForm = ({ children }) => {
   const handleSubmit = async (values) => {
     console.log(values);
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("/api/auth/register/mentor", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Cache-Control": "no-store"
         },
+        next: {revalidate:0},
         body: JSON.stringify(values),
       });
 
@@ -136,10 +138,10 @@ const MentorRegisterForm = ({ children }) => {
                 />
               )}
             </label>
-            <TextInput formik={formik} name="username" label="Name" />
-            {formik.errors[`username`] && formik.touched[`username`] && (
+            <TextInput formik={formik} name="name" label="Name" />
+            {formik.errors[`name`] && formik.touched[`name`] && (
               <span className="error-message text-xs text-red-500">
-                {String(formik.errors[`username`])}
+                {String(formik.errors[`name`])}
               </span>
             )}
             <TextInput formik={formik} name="surname" label="Surname" />

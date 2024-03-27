@@ -2,7 +2,7 @@ export async function POST(request) {
   const reqdata = await request.json();
   console.log(reqdata);
   const externalResponse = await fetch(
-    "localhost:8800" + "/api/v1/mentors/register",
+    process.env.SECRET_API + "/api/v1/mentors/register",
     {
       method: "POST",
       headers: {

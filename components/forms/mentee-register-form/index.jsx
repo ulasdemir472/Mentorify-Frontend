@@ -41,11 +41,13 @@ const MenteeRegisterForm = ({ children }) => {
   const handleSubmit = async (values) => {
     console.log(values);
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("/api/auth/register/mentee", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Cache-Control": "no-store"
         },
+        next: {revalidate:0},
         body: JSON.stringify({
           username: values.name,
           email: values.email,

@@ -5,7 +5,7 @@ import GenericButton from "@/components/generic-button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "@/components/inputs/text-input";
-import { authorize } from "@/lib/authorize";
+import { authorizeMentee } from "@/lib/authorizeMentee";
 import { useAuth } from "@/contexts/AuthContext";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -34,7 +34,7 @@ const LoginForm = ({ children }) => {
 
   const login = async (values) => {
     try {
-      const response = await authorize(values);
+      const response = await authorizeMentee(values);
       console.log(response);
       if (response.status) {
         setIsAuthenticated(true);
