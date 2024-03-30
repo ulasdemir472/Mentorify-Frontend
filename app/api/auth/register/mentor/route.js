@@ -1,15 +1,11 @@
 export async function POST(request) {
-  const reqdata = await request.json();
-  console.log(reqdata);
+  const reqdata = await request.formData();
+  console.log(reqdata)
   const externalResponse = await fetch(
     process.env.SECRET_API + "/api/v1/mentors/register",
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        //Authorization: String(request.headers.get("authorization")),
-      },
-      body: JSON.stringify(reqdata),
+      body: reqdata,
     }
   );
 

@@ -9,7 +9,7 @@ const MentorCard = ({ mentor }) => {
       <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-1/3 group">
         <Image
           //   src="https://cdn.mentorcruise.com/cdn-cgi/image/width=400,format=auto/https://cdn.mentorcruise.com/cache/f17dfa0060b62f5f3ed3b7104c9a9dc5/8d09e6cd281c9cf6/b718c7217c43fed314fabed83e502f8b.jpg"
-          src={randomImageUrl}
+          src={mentor.image || randomImageUrl}
           alt="mentor"
           width={200}
           height={300}
@@ -99,7 +99,7 @@ const MentorCard = ({ mentor }) => {
         <div className="my-4">
           <div className="py-2 flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-x-0.5 rounded-md bg-blue-50 px-3 py-2 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
-              Frontend
+              {mentor.interest.map((interest) => ({ interest }))}
             </span>
           </div>
         </div>

@@ -17,7 +17,7 @@ import handleFileChange from "@/lib/handle-file-change";
 import { useRouter } from "next/navigation";
 
 const MentorRegisterForm = ({ children }) => {
-  const [profilePhotoView, setProfilePhotoView] = useState(null);
+  const [profileimageView, setProfileimageView] = useState(null);
   const router = useRouter();
 
   const ValidationSchema = Yup.object().shape({
@@ -40,9 +40,9 @@ const MentorRegisterForm = ({ children }) => {
       email: "",
       password: "",
       category: "",
-      interests: [],
+      interest: [],
       desc: "",
-      photo: undefined,
+      image: undefined,
     },
     validationSchema: ValidationSchema,
     onSubmit: async (values) => {
@@ -52,20 +52,30 @@ const MentorRegisterForm = ({ children }) => {
 
   const handleSubmit = async (values) => {
     console.log(values);
-    //values.photo = values.photo.name;
+    const formData = new FormData();
+
+    // Diğer alanları JSON formatına dönüştürerek FormData'ya ekleyin
+    Object.keys(values).forEach((key) => {
+      if (key !== "image") {
+        formData.append(key, values[key]);
+      }
+    });
+
+    // Dosya alanını doğrudan FormData'ya ekleyin
+    formData.append("image", values.image);
+
     try {
       const response = await fetch("/api/auth/register/mentor", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           "Cache-Control": "no-store",
         },
         next: { revalidate: 0 },
-        body: JSON.stringify(values),
+        body: formData,
       });
 
       const data = await response.json();
-      if (data.status === 200) {
+      if (data.success) {
         console.log(data);
         toast.success("Registration successful", { autoClose: 500 });
         router.push("/");
@@ -83,14 +93,14 @@ const MentorRegisterForm = ({ children }) => {
       <div className="mx-auto w-full max-w-sm lg:w-96">
         <div>
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
-            <label htmlFor="photo" className="">
+            <label htmlFor="image" className="">
               <p className="block text-sm font-medium leading-5 text-gray-700">
-                Profile Photo
+                Profile image
               </p>
-              {profilePhotoView ? (
+              {profileimageView ? (
                 <img
-                  src={profilePhotoView}
-                  alt="profile photo"
+                  src={profileimageView}
+                  alt="profile image"
                   className="w-36 h-36 rounded-full object-cover"
                 />
               ) : (
@@ -101,38 +111,38 @@ const MentorRegisterForm = ({ children }) => {
               )}
               <input
                 type="file"
-                key={profilePhotoView}
+                key={profileimageView}
                 onChange={async (e) => {
                   const readFile = await handleFileChange(e.target.files[0]);
                   readFile.file
-                    ? toast.success("Profile Photo uploaded successfully", {
+                    ? toast.success("Profile image uploaded successfully", {
                         autoClose: 500,
                       })
-                    : toast.error("Photo upload failed", { autoClose: 500 });
+                    : toast.error("image upload failed", { autoClose: 500 });
 
-                  setProfilePhotoView(readFile.previewImage);
+                  setProfileimageView(readFile.previewImage);
 
-                  formik.setFieldValue("photo", readFile.file);
+                  formik.setFieldValue("image", readFile.file);
                 }}
                 accept="image/jpeg, image/png"
                 className="sr-only"
-                name="photo"
-                id="photo"
+                name="image"
+                id="image"
               />
-              {!profilePhotoView && (
+              {!profileimageView && (
                 <PlusCircleIcon
                   className="h-8 w-8 text-green-400"
                   aria-hidden="true"
                 />
               )}
-              {profilePhotoView && (
+              {profileimageView && (
                 <XCircleIcon
                   onClick={(e) => {
                     e.preventDefault();
 
-                    setProfilePhotoView(null);
+                    setProfileimageView(null);
 
-                    formik.setFieldValue("photo", undefined);
+                    formik.setFieldValue("image", undefined);
                   }}
                   className="h-8 w-8 text-red-400"
                   aria-hidden="true"
