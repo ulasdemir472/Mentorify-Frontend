@@ -66,7 +66,7 @@ const DropdownSearch = () => {
         id="dropdownSearch"
         className={`z-10 ${
           isOpen ? "" : "hidden"
-        } bg-white rounded-lg shadow-sm w-60 border`} // Toggle visibility based on isOpen state
+        } bg-white rounded-lg shadow-sm w-60 border absolute mt-1`} // Toggle visibility based on isOpen state
       >
         <div className="p-3">
           <label htmlFor="input-group-search" className="sr-only">

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import GeneralSearch from "@/components/general-search";
 import SelectSkills from "@/components/inputs/select-skills";
 import MentorCard from "@/components/mentor-card";
+import FilterPrice from "@/components/inputs/filter-price";
 
 const Dashboard = () => {
   const [mentors, setMentors] = useState([]);
@@ -33,11 +34,14 @@ const Dashboard = () => {
     <div className="w-full min-h-screen flex flex-col gap-5 overflow-hidden container">
       <div className="w-full flex flex-col justify-start items-center border-b-2 shadow-sm">
         <div className="w-full flex gap-3 items-center justify-start py-10 px-8">
-          <GeneralSearch className="" />
+          <GeneralSearch className="w-1/3" />
         </div>
-        <div className="w-full flex justify-start items-center pb-10 px-8">
+        <div className="w-full flex justify-start items-center pb-10 px-8 gap-5">
           <div className="">
             <SelectSkills />
+          </div>
+          <div className="">
+            <FilterPrice />
           </div>
         </div>
       </div>

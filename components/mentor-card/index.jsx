@@ -18,18 +18,23 @@ const MentorCard = ({ mentor }) => {
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
         <a
           href=""
-          className="z-10 mt-3 text-3xl font-bold text-white cursor-pointer hover:underline opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+          className="z-10 capitalize mt-3 text-3xl font-bold text-white cursor-pointer hover:underline opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
         >
-          {mentor.username}
+          {mentor.name} {mentor.surname}
         </a>
         <div className="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          Meslek
+          {mentor.category}
         </div>
       </article>
 
       <div className="flex flex-col gap-3 pr-10 ml-10 w-full">
-        <h1 className="font-bold text-2xl">{mentor.username}</h1>
-        <h2 className="">Senior Front End Developer</h2>
+        <h1 className="font-bold text-2xl capitalize">
+          {mentor.name} {mentor.surname}
+        </h1>
+        <h2 className="">
+          Senior Front End Developer at{" "}
+          <span className="font-bold inline">Elmalı Tech</span>
+        </h2>
         <div class="flex items-center mb-4 text-yellow-300">
           <svg
             class="w-5 h-5 me-1"
@@ -98,7 +103,7 @@ const MentorCard = ({ mentor }) => {
             </span>
           </div>
         </div>
-        <div className="flex gap-5 w-full">
+        <div className="flex gap-10 w-full">
           <div className="flex flex-col w-1/3">
             <span className="text-gray-500 font-medium text-sm">
               Starting from

@@ -21,7 +21,7 @@ const MentorRegisterForm = ({ children }) => {
   const router = useRouter();
 
   const ValidationSchema = Yup.object().shape({
-    username: Yup.string().required("Name is required"),
+    name: Yup.string().required("Name is required"),
     surname: Yup.string().required("Surname is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string()
@@ -35,14 +35,14 @@ const MentorRegisterForm = ({ children }) => {
 
   const formik = useFormik({
     initialValues: {
-      name:"",
+      name: "",
       surname: "",
       email: "",
       password: "",
       category: "",
-      subCategory: [],
+      interests: [],
       desc: "",
-      profilePic: undefined,
+      photo: undefined,
     },
     validationSchema: ValidationSchema,
     onSubmit: async (values) => {
@@ -52,14 +52,15 @@ const MentorRegisterForm = ({ children }) => {
 
   const handleSubmit = async (values) => {
     console.log(values);
+    //values.photo = values.photo.name;
     try {
       const response = await fetch("/api/auth/register/mentor", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Cache-Control": "no-store"
+          "Cache-Control": "no-store",
         },
-        next: {revalidate:0},
+        next: { revalidate: 0 },
         body: JSON.stringify(values),
       });
 
@@ -82,7 +83,7 @@ const MentorRegisterForm = ({ children }) => {
       <div className="mx-auto w-full max-w-sm lg:w-96">
         <div>
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
-            <label htmlFor="profilePic" className="">
+            <label htmlFor="photo" className="">
               <p className="block text-sm font-medium leading-5 text-gray-700">
                 Profile Photo
               </p>
@@ -111,12 +112,12 @@ const MentorRegisterForm = ({ children }) => {
 
                   setProfilePhotoView(readFile.previewImage);
 
-                  formik.setFieldValue("profilePic", readFile.file);
+                  formik.setFieldValue("photo", readFile.file);
                 }}
                 accept="image/jpeg, image/png"
                 className="sr-only"
-                name="profilePic"
-                id="profilePic"
+                name="photo"
+                id="photo"
               />
               {!profilePhotoView && (
                 <PlusCircleIcon
@@ -131,7 +132,7 @@ const MentorRegisterForm = ({ children }) => {
 
                     setProfilePhotoView(null);
 
-                    formik.setFieldValue("profilePic", undefined);
+                    formik.setFieldValue("photo", undefined);
                   }}
                   className="h-8 w-8 text-red-400"
                   aria-hidden="true"
@@ -164,7 +165,7 @@ const MentorRegisterForm = ({ children }) => {
             )}
             <SelectCategory formik={formik} label="Select Category" />
             <TagsWithBadges
-              name="subCategory"
+              name="interests"
               formik={formik}
               label="Sub Category"
               placeholder="Select Sub Category"

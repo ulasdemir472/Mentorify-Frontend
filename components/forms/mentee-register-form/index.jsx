@@ -20,7 +20,7 @@ const MenteeRegisterForm = ({ children }) => {
       )
       .required("Password is required"),
     desc: Yup.string()
-      .max(50, "Description must be maximum 50 characters")
+      .max(1500, "Description must be maximum 1500 characters")
       .required("Description is required"),
   });
 
@@ -45,19 +45,14 @@ const MenteeRegisterForm = ({ children }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Cache-Control": "no-store"
+          "Cache-Control": "no-store",
         },
-        next: {revalidate:0},
-        body: JSON.stringify({
-          username: values.name,
-          email: values.email,
-          password: values.password,
-          desc: values.desc,
-        }),
+        next: { revalidate: 0 },
+        body: JSON.stringify(values),
       });
 
       const data = await response.json();
-      if (data.status === 200) {
+      if (data.success) {
         console.log(data);
         toast.success("Registration successful", { autoClose: 500 });
       } else {

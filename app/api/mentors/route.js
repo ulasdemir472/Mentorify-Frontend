@@ -63,7 +63,7 @@ export async function POST(request) {
     );
   
     const data = await externalResponse.json();
-  
+      console.log(data)
     if (externalResponse.ok) {
       return new Response(JSON.stringify(data));
     } else {
