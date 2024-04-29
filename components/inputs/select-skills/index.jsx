@@ -41,7 +41,7 @@ const DropdownSearch = () => {
         data-dropdown-placement="bottom"
         className="text-indigo-500 bg-white border border-indigo-400 focus:ring-2 focus:outline-none focus:ring-indigo-500 font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center"
         type="button"
-        onClick={toggleDropdown} // Add onClick event to toggle dropdown
+        onClick={toggleDropdown}
       >
         Skills
         <svg
@@ -61,12 +61,11 @@ const DropdownSearch = () => {
         </svg>
       </button>
 
-      {/* Dropdown menu */}
       <div
         id="dropdownSearch"
         className={`z-10 ${
           isOpen ? "" : "hidden"
-        } bg-white rounded-lg shadow-sm w-60 border absolute mt-1`} // Toggle visibility based on isOpen state
+        } bg-white rounded-lg shadow-sm w-60 border absolute mt-1`}
       >
         <div className="p-3">
           <label htmlFor="input-group-search" className="sr-only">
@@ -110,6 +109,9 @@ const DropdownSearch = () => {
                 <input
                   id={`checkbox-item-${index}`}
                   type="checkbox"
+                  onClick={() => {
+                    console.log(option);
+                  }}
                   className="w-4 h-4 text-indigo-600 bg-black-100 border-black-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-black-700 dark:focus:ring-offset-black-700 focus:ring-2 dark:bg-black-600 dark:border-black-500"
                 />
                 <label

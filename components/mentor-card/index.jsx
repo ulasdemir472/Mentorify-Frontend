@@ -96,11 +96,13 @@ const MentorCard = ({ mentor }) => {
         </div>
         <p className="my-6 text-sm leading-6 font-normal">{mentor.desc}</p>
         <div className="my-4">
-          <div className="py-2 flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-x-0.5 rounded-md bg-blue-50 px-3 py-2 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
-              {mentor.interest.map((i) => ({ i }))}
-            </span>
-          </div>
+          {mentor.interests.map((interest, index) => (
+            <div className="py-2 flex flex-wrap items-center gap-3" key={index}>
+              <span className="inline-flex items-center gap-x-0.5 rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                {interest}
+              </span>
+            </div>
+          ))}
         </div>
         <div className="flex gap-10 w-full">
           <div className="flex flex-col w-1/3">
