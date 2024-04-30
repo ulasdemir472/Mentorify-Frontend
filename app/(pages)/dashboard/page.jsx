@@ -1,37 +1,46 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import GeneralSearch from "@/components/general-search";
 import SelectSkills from "@/components/inputs/select-skills";
 import MentorCard from "@/components/mentor-card";
 import FilterPrice from "@/components/inputs/filter-price";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { useAuth } from "@/contexts/AuthContext";
+import { useUserStore } from "@/zustand/userStore";
 
 const Dashboard = () => {
   const [mentors, setMentors] = useState([]);
   const [input, setInput] = useState("");
-  const [skills, setSkills] = useState([]);
 
-  const fetchMentors = async () => {
-    try {
-      const response = await fetch("/api/mentors", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch mentors");
-      }
-      const data = await response.json();
-      console.log(data.data);
-      setMentors(data.data);
-    } catch (error) {
-      console.error("Error fetching mentors:", error);
-    }
-  };
+  const { user } = useAuth();
+  const { fetchUserInfo, currentUser } = useUserStore();
 
   useEffect(() => {
+    const fetchMentors = async () => {
+      try {
+        const response = await fetch("/api/mentors", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch mentors");
+        }
+        const data = await response.json();
+        setMentors(data.data);
+
+        // Ensure user object exists and contains id before calling fetchUserInfo
+        if (user?.id) {
+          await fetchUserInfo(user.id);
+        }
+      } catch (error) {
+        console.error("Error fetching mentors:", error);
+      }
+    };
+
     fetchMentors();
-  }, []);
+  }, [user, fetchUserInfo]);
+
+  console.log(currentUser);
 
   const filteredMentors =
     input === ""
