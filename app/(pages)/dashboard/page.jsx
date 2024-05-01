@@ -28,9 +28,8 @@ const Dashboard = () => {
         const data = await response.json();
         setMentors(data.data);
 
-        // Ensure user object exists and contains id before calling fetchUserInfo
         if (user?.id) {
-          await fetchUserInfo(user.id);
+          await fetchUserInfo(user.id, user.role.toLowerCase());
         }
       } catch (error) {
         console.error("Error fetching mentors:", error);
@@ -40,7 +39,7 @@ const Dashboard = () => {
     fetchMentors();
   }, [user, fetchUserInfo]);
 
-  console.log(currentUser);
+  console.log("currentUser : ", currentUser);
 
   const filteredMentors =
     input === ""

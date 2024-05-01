@@ -3,12 +3,11 @@ import Image from "next/image";
 import GenericButton from "@/components/generic-button";
 
 const MentorCard = ({ mentor }) => {
-  const randomImageUrl = `https://i.pravatar.cc/200?u=${Math.random()}`;
   return (
     <div className="border py-8 px-7 flex rounded-lg w-[56rem]">
-      <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-1/3 group">
+      <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-1/3 group">
         <Image
-          src={mentor.image || randomImageUrl}
+          src={mentor.image || "/avatar.png"}
           alt="mentor"
           width={200}
           height={300}
@@ -34,7 +33,7 @@ const MentorCard = ({ mentor }) => {
           Senior Front End Developer at{" "}
           <span className="font-bold inline">Elmalı Tech</span>
         </h2>
-        <div class="flex items-center mb-4 text-yellow-300">
+        <div className="flex items-center mb-4 text-yellow-300">
           <svg
             className="w-5 h-5 me-1"
             aria-hidden="true"

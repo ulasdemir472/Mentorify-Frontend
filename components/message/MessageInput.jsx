@@ -20,6 +20,12 @@ const MessageInput = () => {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSend();
+    }
+  };
+
   const handleSend = async () => {
     try {
       const response = await fetch(
@@ -60,6 +66,7 @@ const MessageInput = () => {
         placeholder="Type a message..."
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyUp={handleKeyPress}
         className="flex flex-1 p-2 rounded-lg border outline-none focus:outline-none text-base focus:ring-2 focus:ring-[#5183fe]"
       />
       <button

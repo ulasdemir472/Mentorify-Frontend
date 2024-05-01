@@ -76,7 +76,7 @@ const MentorRegisterForm = ({ children }) => {
       if (data.success) {
         console.log(data);
         toast.success("Registration successful", { autoClose: 500 });
-        router.push("/");
+        router.push("/login");
       } else {
         console.log(data);
         toast.error("Registration failed", { autoClose: 500 });

@@ -2,12 +2,12 @@ import { create } from "zustand";
 
 export const useUserStore = create((set) => ({
   currentUser: null,
-  fetchUserInfo: async (id) => {
+  fetchUserInfo: async (id, role) => {
     if (!id) return set({ currentUser: null });
 
     try {
       const response = await fetch(
-        `http://localhost:8800/api/v1/mentors/${id}`,
+        `http://localhost:8800/api/v1/${role}s/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

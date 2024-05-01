@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import useConversation from "@/zustand/useConversation";
 import { useUserStore } from "@/zustand/userStore";
 import { useAuth } from "@/contexts/AuthContext";
-import Image from "next/image";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
+import MessageHeader from "./MessageHeader";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
@@ -20,29 +20,17 @@ const MessageContainer = () => {
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
-        <>
-          <div className="flex p-5 justify-between border-b border-gray-500 w-full shadow-md">
-            <div className="flex items-center gap-5">
-              <Image
-                src={selectedConversation.image || "/avatar.png"}
-                width={60}
-                height={60}
-                alt="p"
-                className="object-cover rounded-lg"
-              />
-              <div className="flex flex-col gap-1">
-                <span className="text-lg font-bold">
-                  {selectedConversation.name} {selectedConversation.surname}
-                </span>
-                <p className="text-sm font-light color-[#a5a5a5]">
-                  {selectedConversation.desc}
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-col overflow-auto w-full h-full">
+          <MessageHeader selectedConversation={selectedConversation} />
           <Messages />
           <MessageInput />
-        </>
+          <button
+            onClick={() => window.scrollTo(0, 0)}
+            className="fixed bottom-4 left-4 bg-[#172E59] text-white px-4 py-2 rounded-md shadow-md"
+          >
+            En üste dön
+          </button>
+        </div>
       )}
     </div>
   );
@@ -54,9 +42,9 @@ const NoChatSelected = () => {
 
   useEffect(() => {
     if (user?.id) {
-      fetchUserInfo(user.id);
+      fetchUserInfo(user.id, user.role);
     }
-  }, []);
+  }, [fetchUserInfo, user]);
 
   return (
     <div className="flex items-center justify-center w-full h-full">

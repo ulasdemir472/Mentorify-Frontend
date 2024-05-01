@@ -47,9 +47,6 @@ const LoginForm = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      console.log("USER ", user);
-      console.log("TOKEN ", token);
     }
   };
 

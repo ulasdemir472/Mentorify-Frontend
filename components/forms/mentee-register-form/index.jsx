@@ -1,14 +1,16 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import GenericButton from "@/components/generic-button";
 import TextInput from "@/components/inputs/text-input";
 import TextAreaInput from "@/components/inputs/text-area-input";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const MenteeRegisterForm = ({ children }) => {
-  const [passType, setPassType] = React.useState(true);
+  const [passType, setPassType] = useState(true);
+  const router = useRouter();
 
   const ValidationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -41,7 +43,6 @@ const MenteeRegisterForm = ({ children }) => {
   });
 
   const handleSubmit = async (values) => {
-    console.log(values);
     try {
       const response = await fetch("/api/auth/register/mentee", {
         method: "POST",
@@ -57,6 +58,7 @@ const MenteeRegisterForm = ({ children }) => {
       if (data.success) {
         console.log(data);
         toast.success("Registration successful", { autoClose: 500 });
+        router.push("/login");
       } else {
         console.log(data);
         toast.error("Registration failed", { autoClose: 500 });
