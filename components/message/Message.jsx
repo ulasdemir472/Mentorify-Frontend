@@ -51,7 +51,7 @@ const Message = ({ message }) => {
                 {formattedTime}
               </span>
             </div>
-            <p className={`text-sm font-normal text-gray-900 dark:text-white`}>
+            <p className={`text-md font-normal text-gray-900 dark:text-white`}>
               {message.message}
             </p>
             {/* <div className="group relative my-2.5">
