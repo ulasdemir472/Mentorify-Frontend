@@ -7,7 +7,7 @@ export const useUserStore = create((set) => ({
 
     try {
       const response = await fetch(
-        `http://localhost:8800/api/v1/${role}s/${id}`,
+        process.env.SECRET_API + `/api/v1/${role}s/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
