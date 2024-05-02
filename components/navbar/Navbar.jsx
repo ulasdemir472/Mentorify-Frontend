@@ -4,6 +4,15 @@ import React from "react";
 import Logo from "@/public/logo.svg";
 import GenericButton from "@/components/generic-button";
 import Cookies from "js-cookie";
+import { usePathname } from "next/navigation";
+
+const tabs = [
+  { tr: "Ana Sayfa", en: "dashboard" },
+  { tr: "Başvurular", en: "applications" },
+  { tr: "Mesajlar", en: "messages" },
+  { tr: "İstek Listesi", en: "wishlist" },
+  { tr: "Ayarlar", en: "profile" },
+];
 
 const Navbar = () => {
   const logout = () => {
@@ -11,6 +20,10 @@ const Navbar = () => {
     Cookies.remove("token");
     window.location.href = "/";
   };
+
+  const pathname = usePathname();
+  const activeTab = pathname.split("/").pop();
+  const activeTabTr = tabs.find((tab) => tab.en === activeTab)?.tr;
 
   return (
     <nav className="w-full bg-[#172E59] text-white px-6 py-4 flex items-center space-x-10">
@@ -23,21 +36,18 @@ const Navbar = () => {
       />
       <div className="flex w-full">
         <ul className="flex justify-start w-full gap-8">
-          <li className="p-2 hover:bg-[#1C3D7A] rounded-md text-sm cursor-pointer font-bold">
-            <a href="dashboard">Ana Sayfa</a>
-          </li>
-          <li className="p-2 hover:bg-[#1C3D7A] rounded-md text-sm cursor-pointer font-bold">
-            <a href="applications">Başvurular</a>
-          </li>
-          <li className="p-2 hover:bg-[#1C3D7A] rounded-md text-sm cursor-pointer font-bold">
-            <a href="messages">Mesajlar</a>
-          </li>
-          <li className="p-2 hover:bg-[#1C3D7A] rounded-md text-sm cursor-pointer font-bold">
-            <a href="wishlist">İstek Listesi</a>
-          </li>
-          <li className="p-2 hover:bg-[#1C3D7A] rounded-md text-sm cursor-pointer font-bold">
-            <a href="profile">Ayarlar</a>
-          </li>
+          {tabs.map((tab, index) => (
+            <li
+              key={index}
+              className={
+                "p-2 hover:bg-[#1C3D7A] rounded-md text-sm cursor-pointer font-bold" +
+                " " +
+                (activeTabTr === tab.tr ? "bg-[#1C3D7A]" : "")
+              }
+            >
+              <a href={tab.en}>{tab.tr}</a>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="flex gap-3">
