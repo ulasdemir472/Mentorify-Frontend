@@ -1,25 +1,19 @@
-export async function PATCH(request) {
-  const reqdata = await request.formData();
+export async function PUT(request) {
   const { searchParams } = new URL(request.url);
-
-  console.log(reqdata);
-
-  const role = searchParams.get("role");
-  const id = searchParams.get("id");
+  const menteeId = searchParams.get("menteeId");
+  const mentorId = searchParams.get("mentorId");
 
   const externalResponse = await fetch(
-    process.env.SECRET_API + `/api/v1/${role}/update/${id}`,
+    process.env.SECRET_API +
+      `/api/v1/mentees/add-to-wishlist/${menteeId}/${mentorId}`,
     {
-      method: "PATCH",
-      body: reqdata,
+      method: "PUT",
     }
   );
 
   const data = await externalResponse.json();
 
-  console.log(data);
-
-  if (externalResponse.ok) {
+  if (data.status === 200) {
     return new Response(JSON.stringify(data));
   } else {
     return new Response(JSON.stringify(data));
@@ -27,12 +21,14 @@ export async function PATCH(request) {
 }
 
 export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const menteeId = searchParams.get("menteeId");
+
   const externalResponse = await fetch(
-    process.env.SECRET_API + "/api/v1/mentors",
+    process.env.SECRET_API + `/api/v1/mentees/wishlist/${menteeId}`,
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: String(request.headers.get("authorization")),
       },
     }
   );
@@ -48,20 +44,22 @@ export async function GET(request) {
 
 export async function DELETE(request) {
   const { searchParams } = new URL(request.url);
+  const menteeId = searchParams.get("menteeId");
+  const mentorId = searchParams.get("mentorId");
 
   const externalResponse = await fetch(
     process.env.SECRET_API +
-      "/api/admin/hotels/item/category?" +
-      searchParams.toString(),
+      `/api/v1/mentees/remove-from-wishlist/${menteeId}/${mentorId}`,
     {
       method: "DELETE",
-      headers: {
-        Authorization: String(request.headers.get("authorization")),
-      },
     }
   );
 
   const data = await externalResponse.json();
 
-  return new Response(JSON.stringify(data));
+  if (data.status === 200) {
+    return new Response(JSON.stringify(data));
+  } else {
+    return new Response(JSON.stringify(data));
+  }
 }

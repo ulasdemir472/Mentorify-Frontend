@@ -1,39 +1,94 @@
+"use client";
+import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Wishlist = () => {
+  const { user } = useAuth();
+  const [wishlist, setWishlist] = useState([]);
+
+  const getWishlist = async () => {
+    try {
+      const response = await fetch(
+        `/api/mentees/wishlist?menteeId=${user.id}`,
+        {
+          method: "GET",
+        }
+      );
+      const res = await response.json();
+      console.log(res);
+      if (res.success) {
+        setWishlist(res.data.wishlist);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteFromWishlist = async (mentorId) => {
+    try {
+      const response = await fetch(
+        `/api/mentees/wishlist?menteeId=${user.id}&mentorId=${mentorId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const res = await response.json();
+      console.log(res);
+      if (res.success) {
+        toast.success("Mentor removed from wishlist");
+        setWishlist(wishlist.filter((mentor) => mentor._id !== mentorId));
+        window.location.reload();
+      }
+    } catch (error) {
+      toast.error("Failed to remove mentor from wishlist");
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getWishlist();
+  }, []);
+
   return (
     <div className="max-w-screen-xl px-4 mx-auto py-8">
       <div className="my-8">
         <h2 className="mb-4 font-extrabold text-lg">İstek Listesi</h2>
         <div className="sm:grid grid-cols-3 gap-8">
-          <div className="col-span-1">
-            <div className="border border-[#d0dce6] rounded-xl p-5 relative h-full block">
-              <a className="text-slate-900 text-xl font-bold" href="/">
-                Alessandro Liparoti
-              </a>
-              <div className="my-4 ">
-                <a href="/" className="font-medium text-slate-900">
-                  <Image
-                    height={28}
-                    width={28}
-                    src={"/avatar.png"}
-                    alt="Alessandro Liparoti"
-                    className="inline rounded-full mr-2 align-bottom"
-                  />
-                  <span className="text-md">Software Engineer at Meta</span>
+          {wishlist.map((mentor) => (
+            <div key={mentor._id} className="col-span-1">
+              <div className="border border-[#d0dce6] rounded-xl p-5 relative h-full block">
+                <a className="text-slate-900 text-xl font-bold" href="/">
+                  {mentor.name} {mentor.surname}
                 </a>
-              </div>
-              <div className="mt-6 gap-x-3 flex">
-                <button className="px-4 py-2 text-white bg-[#1c3d7a] rounded-md">
-                  Apply
-                </button>
-                <button className="px-4 py-2 border hover:bg-[#1c3d7a] hover:text-white rounded-md">
-                  Unsave
-                </button>
+                <div className="my-4 ">
+                  <a href="/" className="font-medium text-slate-900">
+                    <Image
+                      height={36}
+                      width={36}
+                      src={mentor.image || "/avatar.png"}
+                      alt="Alessandro Liparoti"
+                      className="inline rounded-full mr-2 align-bottom"
+                    />
+                    <span className="text-md">Software Engineer at Meta</span>
+                  </a>
+                </div>
+                <div className="mt-6 gap-x-3 flex">
+                  <button className="px-4 py-2 text-white bg-[#1c3d7a] rounded-md">
+                    Apply
+                  </button>
+                  <button
+                    className="px-4 py-2 border hover:bg-[#1c3d7a] hover:text-white rounded-md"
+                    onClick={() => deleteFromWishlist(mentor.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
+
           <div>
             <a
               href="/dashboard"

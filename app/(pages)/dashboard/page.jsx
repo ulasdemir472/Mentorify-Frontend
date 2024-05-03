@@ -51,7 +51,7 @@ const Dashboard = () => {
         );
 
   return (
-    <div className="w-full min-h-screen flex flex-col gap-5 overflow-hidden container">
+    <div className="w-full min-h-screen flex flex-col gap-5 overflow-hidden container my-6">
       <div className="w-full flex flex-col justify-start items-center border-b-2 shadow-sm">
         <div className="w-full flex gap-3 items-center justify-start py-10 px-8">
           <div className="relative">

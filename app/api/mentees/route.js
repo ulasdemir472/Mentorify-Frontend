@@ -28,7 +28,7 @@ export async function PATCH(request) {
 
 export async function GET(request) {
   const externalResponse = await fetch(
-    process.env.SECRET_API + "/api/v1/mentors",
+    process.env.SECRET_API + "/api/v1/mentees",
     {
       headers: {
         "Content-Type": "application/json",

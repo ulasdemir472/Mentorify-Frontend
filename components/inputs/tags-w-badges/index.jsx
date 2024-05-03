@@ -42,6 +42,10 @@ export default function TagsWithBadges({
     formik.values[name] = tags;
   }, [tags]);
 
+  useEffect(() => {
+    setTags(initvalue !== undefined ? initvalue : []);
+  }, [initvalue]);
+
   const handleRemoveTag = (tags) => {
     setTags(tags);
   };

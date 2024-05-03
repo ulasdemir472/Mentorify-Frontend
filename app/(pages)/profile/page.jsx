@@ -3,7 +3,6 @@ import React from "react";
 import { Tab } from "@headlessui/react";
 import User from "./user";
 import Billing from "./billing";
-import Balance from "./balance";
 import Password from "./password";
 
 const tabs = ["Profile", "Billing", "Password"];
@@ -39,13 +38,12 @@ const Profile = () => {
         </div>
         <Tab.Panels className="max-w-screen-lg w-full mx-auto p-8 mb-12 mt-4 relative">
           <Tab.Panel className="w-full max-w-screen-lg xl:mx-auto">
-            <User />
+            <div>
+              <User />
+            </div>
           </Tab.Panel>
           <Tab.Panel className="w-full max-w-screen-lg xl:mx-auto">
             <Billing />
-          </Tab.Panel>
-          <Tab.Panel className="w-full max-w-screen-lg xl:mx-auto">
-            <Balance />
           </Tab.Panel>
           <Tab.Panel className="w-full max-w-screen-lg xl:mx-auto">
             <Password />

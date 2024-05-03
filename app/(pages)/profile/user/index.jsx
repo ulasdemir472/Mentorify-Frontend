@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import GenericButton from "@/components/generic-button";
@@ -11,16 +11,16 @@ import {
 } from "@heroicons/react/24/solid";
 import { toast } from "react-toastify";
 import handleFileChange from "@/lib/handle-file-change";
-import { useRouter } from "next/navigation";
+import { useUserStore } from "@/zustand/userStore";
+import { useAuth } from "@/contexts/AuthContext";
+import Image from "next/image";
+import TagsWithBadges from "@/components/inputs/tags-w-badges";
+import NumberInput from "@/components/inputs/number-input";
 
 const User = () => {
   const [profilePhotoView, setProfilePhotoView] = useState(null);
-
-  const ValidationSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    surname: Yup.string().required("Surname is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-  });
+  const { user } = useAuth();
+  const { currentUser, fetchUserInfo } = useUserStore();
 
   const formik = useFormik({
     initialValues: {
@@ -30,42 +30,89 @@ const User = () => {
       interests: [],
       desc: "",
       job: "",
-      linkedIn: "",
-      github: "",
-      photo: undefined,
+      price: 0,
+      image: undefined,
     },
-    validationSchema: ValidationSchema,
     onSubmit: async (values) => {
       handleSubmit(values);
     },
   });
+
+  useEffect(() => {
+    if (user?.id) {
+      fetchUserInfo(user.id, user.role);
+    }
+  }, [fetchUserInfo, user]);
+
+  const handleSubmit = async (values) => {
+    Object.keys(values).forEach((key) => {
+      if (values[key] === "" || values[key] === undefined) {
+        values[key] = currentUser[key] ? currentUser[key] : values[key];
+      }
+    });
+    console.log(values);
+
+    const formData = new FormData();
+    Object.keys(values).forEach((key) => {
+      if (key !== "image") {
+        formData.append(key, values[key]);
+      }
+    });
+    formData.append("image", values.image);
+
+    const role = user.role === "Mentor" ? "mentors" : "mentees";
+
+    try {
+      const response = await fetch(`/api/${role}?id=${user.id}&role=${role}`, {
+        method: "PATCH",
+        headers: {
+          "Cache-Control": "no-store",
+        },
+        next: { revalidate: 0 },
+        body: formData,
+      });
+
+      const res = await response.json();
+      if (res.success) {
+        toast.success("User information updated successfully", {
+          autoClose: 500,
+        });
+      } else {
+        toast.error("User information update failed", { autoClose: 500 });
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("User information update failed", { autoClose: 500 });
+    }
+  };
+
   return (
     <div>
       <h1 className="font-bold text-2xl">User Information</h1>
       <div className="mt-4 border rounded-lg px-4 py-2">
         <h1 className="p-4 font-semibold">Personal Information</h1>
-        <div class="rounded-md bg-blue-100 p-4 my-2">
-          <div class="flex">
-            <div class="flex-shrink-0">
+        <div className="rounded-md bg-blue-100 p-4 my-2">
+          <div className="flex">
+            <div className="flex-shrink-0">
               <svg
-                class="h-5 w-5 text-blue-400"
+                className="h-5 w-5 text-blue-400"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </div>
-            <div class="ml-3 flex-1 text-sm text-blue-500">
-              <span class="font-semibold">Tips</span>
+            <div className="ml-3 flex-1 text-sm text-blue-500">
+              <span className="font-semibold">Tips</span>
               <br />
-              <div class="block mt-1">
-                <ul class="list-disc ml-4 space-y-1">
+              <div className="block mt-1">
+                <ul className="list-disc ml-4 space-y-1">
                   <li>
                     Adding your photo and social media profiles helps mentors
                     feel confident that you’re a real person (e.g. not a bot).
@@ -84,15 +131,25 @@ const User = () => {
           className="space-y-6 grid grid-cols-2 gap-4 mt-4 mr-40"
           onSubmit={formik.handleSubmit}
         >
-          <label htmlFor="photo" className="col-span-2">
+          <label htmlFor="image" className="col-span-2">
             <p className="block text-sm font-medium leading-5 text-gray-700">
               Profile Photo
             </p>
             {profilePhotoView ? (
-              <img
+              <Image
                 src={profilePhotoView}
+                width={144}
+                height={144}
                 alt="profile photo"
-                className="w-36 h-36 rounded-full object-cover"
+                className="rounded-full object-cover"
+              />
+            ) : currentUser ? (
+              <Image
+                src={currentUser?.image}
+                width={144}
+                height={144}
+                alt="profile photo"
+                className="rounded-full object-cover"
               />
             ) : (
               <UserCircleIcon
@@ -113,12 +170,12 @@ const User = () => {
 
                 setProfilePhotoView(readFile.previewImage);
 
-                formik.setFieldValue("photo", readFile.file);
+                formik.setFieldValue("image", readFile.file);
               }}
               accept="image/jpeg, image/png"
               className="sr-only"
-              name="photo"
-              id="photo"
+              name="image"
+              id="image"
             />
             {!profilePhotoView && (
               <PlusCircleIcon
@@ -133,53 +190,78 @@ const User = () => {
 
                   setProfilePhotoView(null);
 
-                  formik.setFieldValue("photo", undefined);
+                  formik.setFieldValue("image", undefined);
                 }}
                 className="h-8 w-8 text-red-400"
                 aria-hidden="true"
               />
             )}
           </label>
-          <TextInput formik={formik} name="name" label="Name*" />
-          {formik.errors[`name`] && formik.touched[`name`] && (
-            <span className="error-message text-xs text-red-500">
-              {String(formik.errors[`name`])}
-            </span>
-          )}
-          <TextInput formik={formik} name="surname" label="Surname*" />
-          {formik.errors[`surname`] && formik.touched[`surname`] && (
-            <span className="error-message text-xs text-red-500">
-              {String(formik.errors[`surname`])}
-            </span>
-          )}
-          <TextInput formik={formik} name="email" label="Email*" />
-          {formik.errors[`email`] && formik.touched[`email`] && (
-            <span className="error-message text-xs text-red-500">
-              {String(formik.errors[`email`])}
-            </span>
-          )}
-
-          <TextInput formik={formik} name="job" label="Job Title" />
-
-          <TextInput
-            formik={formik}
-            name="linkedIn"
-            label="LinkedIn"
-            placeholder="https://www.linkedin.com/..."
-          />
-
-          <TextInput
-            formik={formik}
-            name="github"
-            label="Github"
-            placeholder="https://twitter.com/"
-          />
-
+          <div>
+            <TextInput
+              formik={formik}
+              name="name"
+              value={currentUser?.name || ""}
+              label="Name*"
+            />
+            {formik.errors[`name`] && formik.touched[`name`] && (
+              <span className="error-message text-xs text-red-500">
+                {String(formik.errors[`name`])}
+              </span>
+            )}
+          </div>
+          <div>
+            <TextInput
+              formik={formik}
+              value={currentUser?.surname || ""}
+              name="surname"
+              label="Surname*"
+            />
+            {formik.errors[`surname`] && formik.touched[`surname`] && (
+              <span className="error-message text-xs text-red-500">
+                {String(formik.errors[`surname`])}
+              </span>
+            )}
+          </div>
+          <div>
+            <TextInput
+              formik={formik}
+              value={currentUser?.email || ""}
+              name="email"
+              label="Email*"
+            />
+            {formik.errors[`email`] && formik.touched[`email`] && (
+              <span className="error-message text-xs text-red-500">
+                {String(formik.errors[`email`])}
+              </span>
+            )}
+          </div>
+          <div>
+            <TextInput
+              formik={formik}
+              value={currentUser?.job || ""}
+              name="job"
+              label="Job Title"
+            />
+          </div>
+          <div>
+            <TagsWithBadges
+              name="interests"
+              formik={formik}
+              label="Sub Category"
+              placeholder="Select Sub Category"
+              initvalue={currentUser?.interests}
+            />
+          </div>
+          <div>
+            <NumberInput formik={formik} name="price" label="Price" />
+          </div>
           <div className="col-span-2">
             <TextAreaInput
               formik={formik}
               name="desc"
               label="Description"
+              value={currentUser?.desc || ""}
               placeholder="Talk about yourself..."
             />
           </div>
