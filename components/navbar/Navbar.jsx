@@ -45,7 +45,7 @@ const Navbar = () => {
                 (activeTabTr === tab.tr ? "bg-[#1C3D7A]" : "")
               }
             >
-              <a href={tab.en}>{tab.tr}</a>
+              <a href={`/${tab.en}`}>{tab.tr}</a>
             </li>
           ))}
         </ul>

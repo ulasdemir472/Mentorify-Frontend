@@ -4,6 +4,7 @@ import Image from "next/image";
 import GenericButton from "@/components/generic-button";
 import { toast } from "react-toastify";
 import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
 
 const MentorCard = ({ mentor }) => {
   const { user } = useAuth();
@@ -40,7 +41,7 @@ const MentorCard = ({ mentor }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
         <a
-          href=""
+          href={`/mentor-profile/${mentor._id}`}
           className="z-10 capitalize mt-3 text-3xl font-bold text-white cursor-pointer hover:underline opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
         >
           {mentor.name} {mentor.surname}
@@ -99,9 +100,12 @@ const MentorCard = ({ mentor }) => {
             </span>
             <span className="font-bold text-2xl">200$/month</span>
           </div>
-          <GenericButton className="bg-indigo-500 w-full">
+          <Link
+            href={`/mentor-profile/${mentor._id}`}
+            className="bg-indigo-500 w-full text-white flex items-center justify-center py-2 px-4 rounded-lg"
+          >
             View Profile
-          </GenericButton>
+          </Link>
           <GenericButton className="bg-indigo-500 w-full" onClick={addWishlist}>
             Add to Wishlist
           </GenericButton>

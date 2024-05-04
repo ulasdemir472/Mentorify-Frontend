@@ -6,6 +6,7 @@ import FilterPrice from "@/components/inputs/filter-price";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserStore } from "@/zustand/userStore";
+import MainFooter from "@/components/footer";
 
 const Dashboard = () => {
   const [mentors, setMentors] = useState([]);
@@ -85,6 +86,7 @@ const Dashboard = () => {
           <p>No mentors found</p>
         )}
       </div>
+      <MainFooter />
     </div>
   );
 };
