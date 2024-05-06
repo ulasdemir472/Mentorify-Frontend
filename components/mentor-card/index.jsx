@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import GenericButton from "@/components/generic-button";
 import { toast } from "react-toastify";
@@ -21,6 +21,8 @@ const MentorCard = ({ mentor, currentUser }) => {
       console.log(data);
       if (data.success) {
         toast.success("Added to wishlist");
+        window.location.reload();
+        localStorage.setItem("scrollPosition", window.scrollY);
       } else {
         toast.error("Failed to add to wishlist");
       }
@@ -28,6 +30,36 @@ const MentorCard = ({ mentor, currentUser }) => {
       toast.error("Failed to add to wishlist");
     }
   };
+
+  const removeWishlist = async () => {
+    try {
+      const response = await fetch(
+        `/api/mentees/wishlist?menteeId=${user.id}&mentorId=${mentor._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        toast.success("Removed from wishlist");
+        window.location.reload();
+        localStorage.setItem("scrollPosition", window.scrollY);
+      } else {
+        toast.error("Failed to remove from wishlist");
+      }
+    } catch (error) {
+      toast.error("Failed to remove from wishlist");
+    }
+  };
+
+  useEffect(() => {
+    const scrollPosition = localStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+      localStorage.removeItem("scrollPosition");
+    }
+  }, []);
 
   return (
     <div className="border py-8 px-7 flex rounded-lg w-[56rem]">
@@ -108,7 +140,10 @@ const MentorCard = ({ mentor, currentUser }) => {
           </Link>
 
           {currentUser?.wishlist?.includes(mentor._id) ? (
-            <button className="text-indigo-500 bg-white w-full border border-indigo-500 rounded-lg py-2 px-3 hover:bg-red-500 hover:text-white hover:border-red-500">
+            <button
+              onClick={removeWishlist}
+              className="text-indigo-500 bg-white w-full border border-indigo-500 rounded-lg py-2 px-3 hover:bg-red-500 hover:text-white hover:border-red-500"
+            >
               Remove
             </button>
           ) : (

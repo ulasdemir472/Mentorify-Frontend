@@ -84,6 +84,7 @@ const Dashboard = () => {
               key={mentor._id}
               mentor={mentor}
               currentUser={currentUser}
+              fetchUserInfo={fetchUserInfo}
             />
           ))
         ) : (

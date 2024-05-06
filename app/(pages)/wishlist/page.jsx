@@ -26,7 +26,7 @@ const Wishlist = () => {
     }
   };
 
-  const deleteFromWishlist = async (mentorId) => {
+  const removeWishlist = async (mentorId) => {
     try {
       const response = await fetch(
         `/api/mentees/wishlist?menteeId=${user.id}&mentorId=${mentorId}`,
@@ -34,16 +34,16 @@ const Wishlist = () => {
           method: "DELETE",
         }
       );
-      const res = await response.json();
-      console.log(res);
-      if (res.success) {
-        toast.success("Mentor removed from wishlist");
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        toast.success("Removed from wishlist");
         setWishlist(wishlist.filter((mentor) => mentor._id !== mentorId));
-        window.location.reload();
+      } else {
+        toast.error("Failed to remove from wishlist");
       }
     } catch (error) {
-      toast.error("Failed to remove mentor from wishlist");
-      console.log(error);
+      toast.error("Failed to remove from wishlist");
     }
   };
 
@@ -79,8 +79,8 @@ const Wishlist = () => {
                     Apply
                   </button>
                   <button
-                    className="px-4 py-2 border hover:bg-[#1c3d7a] hover:text-white rounded-md"
-                    onClick={() => deleteFromWishlist(mentor.id)}
+                    className="px-4 py-2 border hover:bg-red-500 hover:text-white rounded-md"
+                    onClick={() => removeWishlist(mentor._id)}
                   >
                     Delete
                   </button>
