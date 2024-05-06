@@ -80,7 +80,11 @@ const Dashboard = () => {
       <div className="mx-auto flex flex-col gap-8">
         {filteredMentors.length > 0 ? (
           filteredMentors.map((mentor) => (
-            <MentorCard key={mentor._id} mentor={mentor} />
+            <MentorCard
+              key={mentor._id}
+              mentor={mentor}
+              currentUser={currentUser}
+            />
           ))
         ) : (
           <p>No mentors found</p>

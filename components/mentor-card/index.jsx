@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 
-const MentorCard = ({ mentor }) => {
+const MentorCard = ({ mentor, currentUser }) => {
   const { user } = useAuth();
 
   const addWishlist = async () => {
@@ -106,9 +106,20 @@ const MentorCard = ({ mentor }) => {
           >
             View Profile
           </Link>
-          <GenericButton className="bg-indigo-500 w-full" onClick={addWishlist}>
-            Add to Wishlist
-          </GenericButton>
+
+          {currentUser?.wishlist?.includes(mentor._id) ? (
+            <button className="text-indigo-500 bg-white w-full border border-indigo-500 rounded-lg py-2 px-3 hover:bg-red-500 hover:text-white hover:border-red-500">
+              Remove
+            </button>
+          ) : (
+            <GenericButton
+              className="bg-indigo-500 w-full"
+              onClick={addWishlist}
+              //disabled={currentUser?.wishlist.includes(mentor._id) ? true : false}
+            >
+              Add to Wishlist
+            </GenericButton>
+          )}
         </div>
       </div>
     </div>

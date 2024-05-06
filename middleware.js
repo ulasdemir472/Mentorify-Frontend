@@ -5,7 +5,13 @@ export async function middleware(request) {
   const { pathname, protocol, host } = request.nextUrl;
 
   // Define the paths that require token validation
-  const protectedPaths = ["/dashboard", "/profile"];
+  const protectedPaths = [
+    "/dashboard",
+    "/profile",
+    "/messages",
+    "/mentor-profile",
+    "/wishlist",
+  ];
 
   // Check if the current path starts with any of the protected paths
   const isProtectedPath = protectedPaths.some((path) =>
@@ -39,5 +45,11 @@ const validateToken = async (token) => {
 };
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/profile/:path*"],
+  matcher: [
+    "/dashboard/:path*",
+    "/profile/:path*",
+    "/messages/:path*",
+    "/mentor-profile/:path*",
+    "/wishlist/:path*",
+  ],
 };

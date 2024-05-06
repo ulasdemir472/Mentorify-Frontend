@@ -5,6 +5,8 @@ import Logo from "@/public/logo.svg";
 import GenericButton from "@/components/generic-button";
 import Cookies from "js-cookie";
 import { usePathname } from "next/navigation";
+import Dropdown from "../dropdown";
+import { useUserStore } from "@/zustand/userStore";
 
 const tabs = [
   { tr: "Ana Sayfa", en: "dashboard" },
@@ -20,6 +22,8 @@ const Navbar = () => {
     Cookies.remove("token");
     window.location.href = "/";
   };
+
+  const { currentUser } = useUserStore();
 
   const pathname = usePathname();
   const activeTab = pathname.split("/").pop();
@@ -51,14 +55,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="flex gap-3">
-        <Image
-          src={Logo}
-          width={50}
-          height={50}
-          alt="Logo"
-          className="flex rounded-lg bg-white cursor-pointer"
-        />
-        {/* Profil Fotosu */}
+        <Dropdown user={currentUser} />
         <GenericButton type="button" onClick={() => logout()}>
           Çıkış
         </GenericButton>

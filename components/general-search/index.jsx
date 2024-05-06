@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 const GeneralSearch = (props) => {
   const { className } = props;
