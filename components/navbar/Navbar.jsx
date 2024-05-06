@@ -10,7 +10,6 @@ import { useUserStore } from "@/zustand/userStore";
 
 const tabs = [
   { tr: "Ana Sayfa", en: "dashboard" },
-  { tr: "Başvurular", en: "applications" },
   { tr: "Mesajlar", en: "messages" },
   { tr: "İstek Listesi", en: "wishlist" },
   { tr: "Ayarlar", en: "profile" },
@@ -29,6 +28,11 @@ const Navbar = () => {
   const activeTab = pathname.split("/").pop();
   const activeTabTr = tabs.find((tab) => tab.en === activeTab)?.tr;
 
+  const filteredTabs =
+    currentUser?.__t === "Mentee"
+      ? tabs
+      : tabs.filter((tab) => tab.en !== "wishlist");
+
   return (
     <nav className="w-full bg-[#172E59] text-white px-6 py-4 flex items-center space-x-10">
       <Image
@@ -40,7 +44,7 @@ const Navbar = () => {
       />
       <div className="flex w-full">
         <ul className="flex justify-start w-full gap-8">
-          {tabs.map((tab, index) => (
+          {filteredTabs.map((tab, index) => (
             <li
               key={index}
               className={

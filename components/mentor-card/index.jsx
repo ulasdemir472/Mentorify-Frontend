@@ -5,6 +5,7 @@ import GenericButton from "@/components/generic-button";
 import { toast } from "react-toastify";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
+import { cn } from "@/utils/utils";
 
 const MentorCard = ({ mentor, currentUser }) => {
   const { user } = useAuth();
@@ -148,7 +149,10 @@ const MentorCard = ({ mentor, currentUser }) => {
             </button>
           ) : (
             <GenericButton
-              className="bg-indigo-500 w-full"
+              className={cn(
+                "bg-indigo-500 w-full",
+                user.role === "Mentor" ? "hidden" : ""
+              )}
               onClick={addWishlist}
               //disabled={currentUser?.wishlist.includes(mentor._id) ? true : false}
             >

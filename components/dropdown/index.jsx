@@ -1,7 +1,6 @@
 import React from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import Image from "next/image";
 import { cn } from "@/utils/utils";
 
 const Dropdown = ({ user }) => {
@@ -11,10 +10,8 @@ const Dropdown = ({ user }) => {
         <Menu.Button className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <span className="absolute -inset-1.5" />
           <span className="sr-only">Open user menu</span>
-          <Image
-            className="rounded-full"
-            width={48}
-            height={48}
+          <img
+            className="rounded-full h-10 w-12 object-cover"
             src={user?.image || "/avatar.png"}
             alt="profile image"
           />
@@ -35,7 +32,7 @@ const Dropdown = ({ user }) => {
               <a
                 href={
                   user.__t === "Mentor"
-                    ? `/mentor-profile/${user.id}`
+                    ? `/mentor-profile/${user._id}`
                     : "/profile"
                 }
                 className={cn(
