@@ -63,8 +63,8 @@ const MentorCard = ({ mentor, currentUser }) => {
   }, []);
 
   return (
-    <div className="border py-8 px-7 flex rounded-lg w-[56rem]">
-      <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-1/3 group">
+    <div className="border py-8 px-7 flex flex-col md:flex md:flex-row rounded-lg w-full md:w-[56rem] gap-3">
+      <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-full md:w-1/3 group">
         <Image
           src={mentor.image || "/avatar.png"}
           alt="mentor"
@@ -88,10 +88,7 @@ const MentorCard = ({ mentor, currentUser }) => {
         <h1 className="font-bold text-2xl capitalize">
           {mentor.name} {mentor.surname}
         </h1>
-        <h2 className="">
-          Senior Front End Developer at{" "}
-          <span className="font-bold inline">Elmalı Tech</span>
-        </h2>
+        <h2 className="text-lg">{mentor.jobTitle}</h2>
         <div className="flex items-center mb-4 text-yellow-300">
           <svg
             className="w-5 h-5 me-1"
@@ -126,12 +123,12 @@ const MentorCard = ({ mentor, currentUser }) => {
             </div>
           ))}
         </div>
-        <div className="flex gap-10 w-full">
+        <div className="flex flex-col gap-5 lg:gap-10 lg:w-full lg:flex-row">
           <div className="flex flex-col w-1/3">
             <span className="text-gray-500 font-medium text-sm">
               Starting from
             </span>
-            <span className="font-bold text-2xl">200$/month</span>
+            <span className="font-bold text-2xl">{mentor.price}₺/ay</span>
           </div>
           <Link
             href={`/mentor-profile/${mentor._id}`}

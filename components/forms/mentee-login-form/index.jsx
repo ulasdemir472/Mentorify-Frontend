@@ -5,7 +5,7 @@ import GenericButton from "@/components/generic-button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "@/components/inputs/text-input";
-import { authorizeMentee } from "@/lib/authorizeMentee";
+import { authorizeMentee, googleLogin } from "@/lib/authorizeMentee";
 import { useAuth } from "@/contexts/AuthContext";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -45,6 +45,15 @@ const LoginForm = ({ children }) => {
         toast.success("Login successful", { autoClose: 500 });
         router.push("/dashboard");
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGoogle = async () => {
+    try {
+      const response = await googleLogin();
+      console.log(response.json());
     } catch (error) {
       console.log(error);
     }
@@ -167,9 +176,9 @@ const LoginForm = ({ children }) => {
               <span className="px-2 bg-white">Or</span>
             </div>
           </div>
-          <a
+          <button
             className="white-btn small w-full text-center"
-            href="/auth/google/login/"
+            onClick={handleGoogle}
           >
             <div className="mx-auto border-2 px-3 py-1.5 rounded-md">
               <Image
@@ -183,7 +192,7 @@ const LoginForm = ({ children }) => {
                 Log in with Google
               </span>
             </div>
-          </a>
+          </button>
           {children}
         </div>
       </div>

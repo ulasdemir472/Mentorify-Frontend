@@ -2,6 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { cn } from "@/utils/utils";
+import Image from "next/image";
 
 const Dropdown = ({ user }) => {
   return (
@@ -10,8 +11,10 @@ const Dropdown = ({ user }) => {
         <Menu.Button className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <span className="absolute -inset-1.5" />
           <span className="sr-only">Open user menu</span>
-          <img
-            className="rounded-full h-10 w-12 object-cover"
+          <Image
+            height={60}
+            width={60}
+            className="rounded-full h-10 object-cover"
             src={user?.image || "/avatar.png"}
             alt="profile image"
           />
@@ -40,7 +43,7 @@ const Dropdown = ({ user }) => {
                   "block px-4 py-2 text-sm text-gray-700"
                 )}
               >
-                Your Profile
+                Profil
               </a>
             )}
           </Menu.Item>
@@ -53,7 +56,7 @@ const Dropdown = ({ user }) => {
                   "block px-4 py-2 text-sm text-gray-700"
                 )}
               >
-                Sign out
+                Çıkış yap
               </a>
             )}
           </Menu.Item>
