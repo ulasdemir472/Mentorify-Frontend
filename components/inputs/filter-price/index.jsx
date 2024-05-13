@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 const FilterPrice = () => {
+  const prices = [0, 500, 1000, 1500, 2000];
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -45,38 +47,17 @@ const FilterPrice = () => {
         }  w-40 py-2 bg-white border border-gray-200 rounded-lg shadow-lg absolute mt-1`}
       >
         <ul className="flex flex-col gap-2">
-          <li
-            className={`text-gray-700 px-4 py-2 rounded-lg cursor-pointer ${
-              selectedOption === "$0 - $100" ? "bg-gray-100" : ""
-            }`}
-            onClick={() => handleOptionClick("$0 - $100")}
-          >
-            $0 - $100
-          </li>
-          <li
-            className={`text-gray-700 px-4 py-2 rounded-lg cursor-pointer ${
-              selectedOption === "$100 - $500" ? "bg-gray-100" : ""
-            }`}
-            onClick={() => handleOptionClick("$100 - $500")}
-          >
-            $100 - $500
-          </li>
-          <li
-            className={`text-gray-700 px-4 py-2 rounded-lg cursor-pointer ${
-              selectedOption === "$500 - $1000" ? "bg-gray-100" : ""
-            }`}
-            onClick={() => handleOptionClick("$500 - $1000")}
-          >
-            $500 - $1000
-          </li>
-          <li
-            className={`text-gray-700 px-4 py-2 rounded-lg cursor-pointer ${
-              selectedOption === "$1000 - $5000" ? "bg-gray-100" : ""
-            }`}
-            onClick={() => handleOptionClick("$1000 - $5000")}
-          >
-            $1000 - $5000
-          </li>
+          {prices.map((price) => (
+            <li
+              key={price}
+              className={`text-gray-700 px-4 py-2 rounded-lg cursor-pointer ${
+                selectedOption === price ? "bg-gray-100" : ""
+              }`}
+              onClick={() => handleOptionClick(price)}
+            >
+              {price < 2000 ? `${price}₺ - ${price + 500}₺` : `${price}₺ +`}
+            </li>
+          ))}
         </ul>
       </div>
     </div>

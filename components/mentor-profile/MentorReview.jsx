@@ -142,6 +142,7 @@ const MentorReview = ({ mentor }) => {
             className="py-8 px-8 border border-slate-400 w-full rounded-lg mt-3"
             type="text"
             name="review"
+            value={review}
             onChange={(e) => setReview(e.target.value)}
             placeholder="Yorumunuzu buraya yazın..."
           />

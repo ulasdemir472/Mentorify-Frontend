@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import GenericButton from "@/components/generic-button";
 import TextInput from "@/components/inputs/text-input";
 import TextAreaInput from "@/components/inputs/text-area-input";
@@ -29,7 +28,7 @@ const User = () => {
       email: "",
       interests: [],
       desc: "",
-      job: "",
+      jobTitle: "",
       price: 0,
       image: undefined,
     },
@@ -42,7 +41,7 @@ const User = () => {
     if (user?.id) {
       fetchUserInfo(user.id, user.role);
     }
-  }, [fetchUserInfo, user]);
+  }, []);
 
   const handleSubmit = async (values) => {
     Object.keys(values).forEach((key) => {
@@ -145,7 +144,7 @@ const User = () => {
               />
             ) : currentUser ? (
               <Image
-                src={currentUser?.image}
+                src={currentUser?.image || "/avatar.png"}
                 width={144}
                 height={144}
                 alt="profile photo"
@@ -202,7 +201,7 @@ const User = () => {
               formik={formik}
               name="name"
               value={currentUser?.name || ""}
-              label="Name*"
+              label="İsim*"
             />
             {formik.errors[`name`] && formik.touched[`name`] && (
               <span className="error-message text-xs text-red-500">
@@ -215,7 +214,7 @@ const User = () => {
               formik={formik}
               value={currentUser?.surname || ""}
               name="surname"
-              label="Surname*"
+              label="Soyisim*"
             />
             {formik.errors[`surname`] && formik.touched[`surname`] && (
               <span className="error-message text-xs text-red-500">
@@ -236,33 +235,42 @@ const User = () => {
               </span>
             )}
           </div>
-          <div>
-            <TextInput
-              formik={formik}
-              value={currentUser?.job || ""}
-              name="job"
-              label="Job Title"
-            />
-          </div>
+          {user.role === "Mentor" && (
+            <>
+              <div>
+                <TextInput
+                  formik={formik}
+                  value={currentUser?.jobTitle || ""}
+                  name="jobTitle"
+                  label="İş Unvanı ve Şirket Adı*"
+                />
+              </div>
+              <div>
+                <NumberInput
+                  formik={formik}
+                  name="price"
+                  value={currentUser?.price || 0}
+                  label="Price"
+                />
+              </div>
+            </>
+          )}
           <div>
             <TagsWithBadges
               name="interests"
               formik={formik}
-              label="Sub Category"
-              placeholder="Select Sub Category"
+              label="Interests*"
+              placeholder="İlgi alanlarınızı giriniz..."
               initvalue={currentUser?.interests}
             />
-          </div>
-          <div>
-            <NumberInput formik={formik} name="price" label="Price" />
           </div>
           <div className="col-span-2">
             <TextAreaInput
               formik={formik}
               name="desc"
-              label="Description"
+              label="Hakkında"
               value={currentUser?.desc || ""}
-              placeholder="Talk about yourself..."
+              placeholder="Kendiniz hakkında kısa bir açıklama yapınız..."
             />
           </div>
           <GenericButton type="submit" className="w-full">

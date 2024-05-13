@@ -1,5 +1,6 @@
 "use client";
 import MainFooter from "@/components/footer";
+import Loading from "@/components/loading";
 import MentorAbout from "@/components/mentor-profile/MentorAbout";
 import MentorHeader from "@/components/mentor-profile/MentorHeader";
 import MentorInfo from "@/components/mentor-profile/MentorInfo";
@@ -15,6 +16,7 @@ const MentorProfile = () => {
   const [mentor, setMentor] = useState({});
   const { user } = useAuth();
   const { currentUser, fetchUserInfo } = useUserStore();
+  const [loading, setLoading] = useState(true);
 
   const getMentor = async () => {
     try {
@@ -24,10 +26,12 @@ const MentorProfile = () => {
         },
       });
       const data = await response.json();
+      console.log(data.data);
       setMentor(data.data);
       if (user?.id) {
         await fetchUserInfo(user.id, user.role.toLowerCase());
       }
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching mentor:", error);
     }
@@ -38,24 +42,28 @@ const MentorProfile = () => {
   }, []);
 
   return (
-    <>
-      <div>
-        <div className="relative bg-[#1c3d7a] pt-8">
-          <MentorHeader mentor={mentor} />
-        </div>
-        <MentorInfo mentor={mentor} currentUser={currentUser} />
-        <hr className="my-12" />
-        <div className="max-w-screen-xl mx-auto">
-          <div className="w-full lg:w-1/2 xl:w-2/3 relative py-4 px-4 sm:px-8">
-            <MentorPrice mentor={mentor} />
-            <MentorAbout mentor={mentor} />
-            <hr className="my-12" />
-            <MentorReview mentor={mentor} />
+    <div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div>
+          <div className="relative bg-[#1c3d7a] pt-8">
+            <MentorHeader mentor={mentor} />
           </div>
+          <MentorInfo mentor={mentor} currentUser={currentUser} />
+          <hr className="my-12" />
+          <div className="max-w-screen-xl mx-auto">
+            <div className="w-full lg:w-1/2 xl:w-2/3 relative py-4 px-4 sm:px-8">
+              <MentorPrice mentor={mentor} />
+              <MentorAbout mentor={mentor} />
+              <hr className="my-12" />
+              <MentorReview mentor={mentor} />
+            </div>
+          </div>
+          <MainFooter />
         </div>
-      </div>
-      <MainFooter />
-    </>
+      )}
+    </div>
   );
 };
 
