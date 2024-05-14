@@ -8,7 +8,7 @@ export async function PATCH(request) {
   const id = searchParams.get("id");
 
   const externalResponse = await fetch(
-    process.env.SECRET_API + `/api/v1/${role}/update/${id}`,
+    process.env.SECRET_API + `/api/v1/${role}/${id}`,
     {
       method: "PATCH",
       body: reqdata,

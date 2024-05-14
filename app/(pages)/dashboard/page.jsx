@@ -7,10 +7,14 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserStore } from "@/zustand/userStore";
 import MainFooter from "@/components/footer";
+import Pagination from "@/components/pagination";
+import { paginate } from "@/helpers/paginate";
 
 const Dashboard = () => {
   const [mentors, setMentors] = useState([]);
   const [input, setInput] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
 
   const { user } = useAuth();
   const { fetchUserInfo, currentUser } = useUserStore();
@@ -49,8 +53,17 @@ const Dashboard = () => {
           (mentor) =>
             mentor?.name?.toLowerCase().includes(input.toLowerCase()) ||
             mentor?.category?.toLowerCase().includes(input.toLowerCase()) ||
-            mentor?.price >= parseInt(input)
+            mentor?.price >= parseInt(input) ||
+            mentor?.interests.some((interest) =>
+              interest.toLowerCase().includes(input.toLowerCase())
+            )
         );
+
+  const paginatedPosts = paginate(filteredMentors, currentPage, pageSize);
+
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="w-full min-h-screen flex flex-col gap-5 overflow-hidden my-6">
@@ -79,8 +92,8 @@ const Dashboard = () => {
         </div> */}
       </div>
       <div className="mx-auto flex flex-col gap-8">
-        {filteredMentors.length > 0 ? (
-          filteredMentors.map((mentor) => (
+        {paginatedPosts.length > 0 ? (
+          paginatedPosts.map((mentor) => (
             <MentorCard
               key={mentor._id}
               mentor={mentor}
@@ -92,6 +105,12 @@ const Dashboard = () => {
           <p>No mentors found</p>
         )}
       </div>
+      <Pagination
+        items={filteredMentors.length}
+        currentPage={currentPage}
+        pageSize={pageSize}
+        onPageChange={onPageChange}
+      />
       <MainFooter />
     </div>
   );

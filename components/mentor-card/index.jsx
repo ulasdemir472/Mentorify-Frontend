@@ -19,9 +19,8 @@ const MentorCard = ({ mentor, currentUser }) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       if (data.success) {
-        toast.success("Added to wishlist");
+        toast.success("Added to wishlist", { autoClose: 500 });
         window.location.reload();
         localStorage.setItem("scrollPosition", window.scrollY);
       } else {
@@ -41,9 +40,8 @@ const MentorCard = ({ mentor, currentUser }) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       if (data.success) {
-        toast.success("Removed from wishlist");
+        toast.success("Removed from wishlist", { autoClose: 500 });
         window.location.reload();
         localStorage.setItem("scrollPosition", window.scrollY);
       } else {
@@ -115,7 +113,7 @@ const MentorCard = ({ mentor, currentUser }) => {
           </span>
         </div>
         <p className="my-6 text-sm leading-6 font-normal">{mentor.desc}</p>
-        <div className="my-4">
+        <div className="my-4 flex gap-3">
           {mentor.interests.map((interest, index) => (
             <div className="py-2 flex flex-wrap items-center gap-3" key={index}>
               <span className="inline-flex items-center gap-x-0.5 rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">

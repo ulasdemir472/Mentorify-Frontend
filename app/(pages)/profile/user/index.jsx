@@ -45,7 +45,11 @@ const User = () => {
 
   const handleSubmit = async (values) => {
     Object.keys(values).forEach((key) => {
-      if (values[key] === "" || values[key] === undefined) {
+      if (
+        values[key] === "" ||
+        values[key] === undefined ||
+        values[key] === 0
+      ) {
         values[key] = currentUser[key] ? currentUser[key] : values[key];
       }
     });
@@ -53,11 +57,22 @@ const User = () => {
 
     const formData = new FormData();
     Object.keys(values).forEach((key) => {
-      if (key !== "image") {
+      if (key === "interests" && Array.isArray(values[key])) {
+        if (values[key].length === 0) {
+          formData.append("interests", ""); // Boş dizi için boş bir değer ekle
+        } else {
+          values[key].forEach((interest) => {
+            formData.append("interests", interest);
+          });
+        }
+      } else if (key !== "image") {
         formData.append(key, values[key]);
       }
     });
-    formData.append("image", values.image);
+
+    if (values.image) {
+      formData.append("image", values.image);
+    }
 
     const role = user.role === "Mentor" ? "mentors" : "mentees";
 
