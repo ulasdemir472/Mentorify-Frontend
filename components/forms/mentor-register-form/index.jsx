@@ -67,14 +67,18 @@ const MentorRegisterForm = ({ children }) => {
   });
 
   const handleSubmit = async (values) => {
-    console.log(values);
     const formData = new FormData();
 
     Object.keys(values).forEach((key) => {
-      if (key !== "image") {
+      if (key === "interests" && Array.isArray(values[key])) {
+        values[key].forEach((interest) => {
+          formData.append("interests", interest);
+        });
+      } else if (key !== "image") {
         formData.append(key, values[key]);
       }
     });
+
     formData.append("image", values.image);
 
     try {

@@ -1,8 +1,34 @@
 import React from "react";
+import { toast } from "react-toastify";
 
-const MentorPrice = ({ mentor }) => {
+const MentorPrice = ({ mentor, currentUser }) => {
   const applyToMentor = async () => {
-    console.log("Başvuruldu");
+    try {
+      const response = await fetch(
+        `/api/mentees/applications?menteeId=${currentUser._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          next: { revalidate: 0 },
+          body: JSON.stringify({ mentorId: mentor._id }),
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        toast.success(
+          "Başvurunuz alındı. Mentorunuz en kısa sürede size dönüş yapacak."
+        );
+        window.location.reload();
+      } else {
+        toast.error("Başvurunuz alınamadı. Lütfen tekrar deneyin.");
+      }
+    } catch (error) {
+      toast.error("Başvurunuz alınamadı. Lütfen tekrar deneyin.");
+    }
   };
 
   return (
@@ -76,8 +102,11 @@ const MentorPrice = ({ mentor }) => {
                     <button
                       className="bg-[#118577] px-4 py-2 rounded-lg text-white w-full text-center"
                       onClick={applyToMentor}
+                      disabled={currentUser?.applications.includes(mentor._id)}
                     >
-                      Başvur
+                      {currentUser?.applications.includes(mentor._id)
+                        ? "Başvuruldu"
+                        : "Başvur"}
                     </button>
                     <div className="mt-2 text-sm flex flex-col">
                       <span className="mt-2 text-slate-600 flex">

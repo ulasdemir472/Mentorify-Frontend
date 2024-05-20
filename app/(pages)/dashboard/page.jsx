@@ -31,6 +31,7 @@ const Dashboard = () => {
           throw new Error("Failed to fetch mentors");
         }
         const data = await response.json();
+        console.log(data.data);
         setMentors(data.data);
 
         if (user?.id) {
@@ -63,6 +64,7 @@ const Dashboard = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

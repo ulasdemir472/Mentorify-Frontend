@@ -19,7 +19,7 @@ const Wishlist = () => {
       const res = await response.json();
       console.log(res);
       if (res.success) {
-        setWishlist(res.data.wishlist);
+        setWishlist(res.data);
       }
     } catch (error) {
       console.log(error);
@@ -58,12 +58,12 @@ const Wishlist = () => {
         <div className="sm:grid grid-cols-3 gap-8">
           {wishlist.map((mentor) => (
             <div key={mentor._id} className="col-span-1">
-              <div className="border border-[#d0dce6] rounded-xl p-5 relative h-full block">
-                <a className="text-slate-900 text-xl font-bold" href="/">
+              <div className="border border-[#d0dce6] rounded-xl p-5 relative h-full flex flex-col justify-between">
+                <span className="text-slate-900 text-xl font-bold">
                   {mentor.name} {mentor.surname}
-                </a>
+                </span>
                 <div className="my-4 ">
-                  <a href="/" className="font-medium text-slate-900">
+                  <div className="font-medium text-slate-900">
                     <Image
                       height={36}
                       width={36}
@@ -71,18 +71,21 @@ const Wishlist = () => {
                       alt="Alessandro Liparoti"
                       className="inline rounded-full mr-2 align-bottom"
                     />
-                    <span className="text-md">Software Engineer at Meta</span>
-                  </a>
+                    <span className="text-md">{mentor.jobTitle}</span>
+                  </div>
                 </div>
                 <div className="mt-6 gap-x-3 flex">
-                  <button className="px-4 py-2 text-white bg-[#1c3d7a] rounded-md">
-                    Apply
-                  </button>
+                  <a
+                    href={`/mentor-profile/${mentor._id}`}
+                    className="px-4 py-2 text-white bg-[#1c3d7a] rounded-md"
+                  >
+                    Profile git
+                  </a>
                   <button
                     className="px-4 py-2 border hover:bg-red-500 hover:text-white rounded-md"
                     onClick={() => removeWishlist(mentor._id)}
                   >
-                    Delete
+                    Sil
                   </button>
                 </div>
               </div>

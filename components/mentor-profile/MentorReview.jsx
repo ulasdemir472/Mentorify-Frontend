@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import GenericButton from "../generic-button";
 
-const MentorReview = ({ mentor }) => {
+const MentorReview = ({ mentor, currentUser }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
   const handleReview = async (e) => {
     e.preventDefault();
-    console.log(review);
-    console.log(rating);
   };
 
   return (
@@ -147,7 +145,13 @@ const MentorReview = ({ mentor }) => {
             placeholder="Yorumunuzu buraya yazın..."
           />
 
-          <GenericButton onClick={(e) => handleReview(e)} className="w-[50%]">
+          <GenericButton
+            onClick={(e) => handleReview(e)}
+            className="w-[50%]"
+            disabled={
+              mentor.approvedMentees?.includes(currentUser._id) ? false : true
+            }
+          >
             Gönder
           </GenericButton>
         </div>

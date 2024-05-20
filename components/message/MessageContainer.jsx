@@ -47,8 +47,8 @@ const NoChatSelected = () => {
   }, [fetchUserInfo, user]);
 
   return (
-    <div className="flex items-center justify-center w-full h-full">
-      <div className="px-8 py-6 text-center sm:text-lg md:text-xl text-indigo-500 font-semibold flex flex-col items-center gap-2 border rounded-md border-indigo-500">
+    <div className="flex items-center justify-center w-full h-full relative">
+      <div className="absolute top-80 px-8 py-6 text-center sm:text-lg md:text-xl text-indigo-500 font-semibold flex flex-col items-center gap-2 border rounded-md border-indigo-500">
         <p>Welcome 👋 {currentUser?.name} ❄</p>
         <p>Select a chat to start messaging</p>
       </div>

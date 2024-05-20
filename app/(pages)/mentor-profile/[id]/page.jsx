@@ -54,10 +54,10 @@ const MentorProfile = () => {
           <hr className="my-12" />
           <div className="max-w-screen-xl mx-auto">
             <div className="w-full lg:w-1/2 xl:w-2/3 relative py-4 px-4 sm:px-8">
-              <MentorPrice mentor={mentor} />
+              <MentorPrice mentor={mentor} currentUser={currentUser} />
               <MentorAbout mentor={mentor} />
               <hr className="my-12" />
-              <MentorReview mentor={mentor} />
+              <MentorReview mentor={mentor} currentUser={currentUser} />
             </div>
           </div>
           <MainFooter />
