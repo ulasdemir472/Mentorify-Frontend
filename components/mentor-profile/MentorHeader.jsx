@@ -40,7 +40,7 @@ const MentorHeader = ({ mentor }) => {
           className="flex-none flex items-end gap-x-6 pl-6 sm:pl-0"
         >
           <span>
-            <a target="_blank" href={mentor.linkedIn}>
+            <a target="_blank" href={mentor.linkedin}>
               <svg
                 className="h-6 w-6 text-white align-bottom cursor-pointer"
                 viewBox="0 0 24 24"
