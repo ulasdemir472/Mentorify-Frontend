@@ -1,10 +1,10 @@
 export async function POST(request) {
   const reqdata = await request.json();
   const { searchParams } = new URL(request.url);
-  const menteeId = searchParams.get("menteeId");
+  const mentorId = searchParams.get("mentorId");
 
   const externalResponse = await fetch(
-    process.env.SECRET_API + `/api/v1/mentors/applications/${menteeId}`,
+    process.env.SECRET_API + `/api/v1/mentors/applicants/approve/${mentorId}`,
     {
       headers: {
         "Content-Type": "application/json",

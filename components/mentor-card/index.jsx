@@ -122,7 +122,7 @@ const MentorCard = ({ mentor, currentUser }) => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col gap-5 lg:gap-10 lg:w-full lg:flex-row">
+        <div className="flex flex-col gap-5 lg:gap-10 lg:w-full lg:flex-row lg:h-14">
           <div className="flex flex-col w-1/3">
             <span className="text-gray-500 font-medium text-sm">
               Starting from

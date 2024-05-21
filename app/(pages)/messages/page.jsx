@@ -4,7 +4,7 @@ import MessageContainer from "@/components/message/MessageContainer";
 
 const Messsages = () => {
   return (
-    <div className="min-h-screen flex w-full relative">
+    <div className="h-screen flex w-full relative">
       <Sidebar />
       <MessageContainer />
     </div>

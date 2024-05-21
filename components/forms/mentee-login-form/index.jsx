@@ -53,7 +53,7 @@ const LoginForm = ({ children }) => {
   const handleGoogle = async () => {
     try {
       const response = await googleLogin();
-      console.log(response.json());
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

@@ -36,7 +36,7 @@ const Sidebar = () => {
         );
 
   return (
-    <aside className="flex flex-col w-[20%] overflow-auto">
+    <aside className="flex flex-col w-[20%] h-full overflow-auto">
       <h1 className="p-4 text-bold font-bold">Kişiler</h1>
       <div className="relative">
         <MagnifyingGlassIcon
@@ -53,10 +53,7 @@ const Sidebar = () => {
       </div>
       <div className="w-full h-2 my-2 shadow-md" />
       {filteredUsers.map((user) => (
-        <div
-          className="flex flex-col gap-5 overflow-auto hover:bg-indigo-100"
-          key={user._id}
-        >
+        <div className="flex flex-col gap-5 hover:bg-indigo-100" key={user._id}>
           <Conversation user={user} />
         </div>
       ))}

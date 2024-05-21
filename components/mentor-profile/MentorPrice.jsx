@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 
 const MentorPrice = ({ mentor, currentUser }) => {
+  console.log(currentUser);
   const applyToMentor = async () => {
     try {
       const response = await fetch(
@@ -99,15 +100,19 @@ const MentorPrice = ({ mentor, currentUser }) => {
                     </p>
                   </div>
                   <div className="mt-8 w-full flex flex-col">
-                    <button
-                      className="bg-[#118577] px-4 py-2 rounded-lg text-white w-full text-center"
-                      onClick={applyToMentor}
-                      disabled={currentUser?.applications.includes(mentor._id)}
-                    >
-                      {currentUser?.applications.includes(mentor._id)
-                        ? "Başvuruldu"
-                        : "Başvur"}
-                    </button>
+                    {currentUser.__t === "Mentee" ? (
+                      <button
+                        className="bg-[#118577] px-4 py-2 rounded-lg text-white w-full text-center"
+                        onClick={applyToMentor}
+                        disabled={currentUser?.applications.includes(
+                          mentor._id
+                        )}
+                      >
+                        {currentUser?.applications.includes(mentor._id)
+                          ? "Başvuruldu"
+                          : "Başvur"}
+                      </button>
+                    ) : null}
                     <div className="mt-2 text-sm flex flex-col">
                       <span className="mt-2 text-slate-600 flex">
                         <svg

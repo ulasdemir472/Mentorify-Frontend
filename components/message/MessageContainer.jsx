@@ -16,20 +16,14 @@ const MessageContainer = () => {
   }, [setSelectedConversation]);
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-gray-100">
+    <div className="flex flex-col flex-1 items-center justify-center bg-gray-100 overflow-auto">
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
-        <div className="flex flex-col overflow-auto w-full h-full">
+        <div className="flex flex-col w-full h-full">
           <MessageHeader selectedConversation={selectedConversation} />
           <Messages />
           <MessageInput />
-          <button
-            onClick={() => window.scrollTo(0, 0)}
-            className="fixed bottom-4 left-4 bg-[#172E59] text-white px-4 py-2 rounded-md shadow-md"
-          >
-            En üste dön
-          </button>
         </div>
       )}
     </div>
