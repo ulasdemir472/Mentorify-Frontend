@@ -15,6 +15,7 @@ const Messages = () => {
       endRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   }, [messages]);
+
   return (
     <div className="p-5 flex-1 flex gap-5 flex-col w-full overflow-auto">
       {!loading &&

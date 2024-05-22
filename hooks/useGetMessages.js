@@ -16,7 +16,6 @@ const useGetMessages = () => {
           `http://localhost:8800/api/v1/messages/${selectedConversation._id}/${user.id}`
         );
         const data = await res.json();
-        console.log(data);
         if (data.error) throw new Error(data.error);
         setMessages(data);
       } catch (error) {
@@ -28,6 +27,28 @@ const useGetMessages = () => {
 
     if (selectedConversation?._id) getMessages();
   }, [selectedConversation?._id, setMessages, user.id]);
+
+  useEffect(() => {
+    if (selectedConversation) {
+      messages.forEach((message) => {
+        if (!message.isSeen && message.senderId !== user.id) {
+          const markAsSeen = async () => {
+            await fetch(
+              `http://localhost:8800/api/v1/messages/messages/${message._id}/seen`,
+              {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+          };
+
+          markAsSeen();
+        }
+      });
+    }
+  }, [messages, selectedConversation, user.id]);
 
   return { messages, loading };
 };
