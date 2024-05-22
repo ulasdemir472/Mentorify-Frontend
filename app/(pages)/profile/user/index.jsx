@@ -102,9 +102,9 @@ const User = () => {
 
   return (
     <div>
-      <h1 className="font-bold text-2xl">User Information</h1>
+      <h1 className="font-bold text-2xl">Kullanıcı Bilgileri</h1>
       <div className="mt-4 border rounded-lg px-4 py-2">
-        <h1 className="p-4 font-semibold">Personal Information</h1>
+        <h1 className="p-4 font-semibold">Kişisel Bilgiler</h1>
         <div className="rounded-md bg-blue-100 p-4 my-2">
           <div className="flex">
             <div className="flex-shrink-0">
@@ -123,18 +123,19 @@ const User = () => {
               </svg>
             </div>
             <div className="ml-3 flex-1 text-sm text-blue-500">
-              <span className="font-semibold">Tips</span>
+              <span className="font-semibold">İpuçları</span>
               <br />
               <div className="block mt-1">
                 <ul className="list-disc ml-4 space-y-1">
                   <li>
-                    Adding your photo and social media profiles helps mentors
-                    feel confident that you’re a real person (e.g. not a bot).
+                    Fotoğrafınızı ve sosyal medya profillerinizi eklemek,
+                    mentorların sizin gerçek bir kişi olduğunuzdan (örneğin bir
+                    bot olmadığınızdan) emin olmalarına yardımcı olur.
                   </li>
                   <li>
-                    Your profile is only visible to mentors that you send
-                    applications to. It is not indexed on search engines like
-                    Google.
+                    Profiliniz yalnızca başvuru gönderdiğiniz mentorlar
+                    tarafından görülebilir. Google gibi arama motorlarında
+                    indekslenmez.
                   </li>
                 </ul>
               </div>
@@ -147,7 +148,7 @@ const User = () => {
         >
           <label htmlFor="image" className="col-span-2">
             <p className="block text-sm font-medium leading-5 text-gray-700">
-              Profile Photo
+              Profil Fotoğrafı
             </p>
             {profilePhotoView ? (
               <Image
@@ -289,7 +290,7 @@ const User = () => {
             />
           </div>
           <GenericButton type="submit" className="w-full">
-            Save Changes
+            Kaydet
           </GenericButton>
         </form>
       </div>

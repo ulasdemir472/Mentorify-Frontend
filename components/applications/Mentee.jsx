@@ -40,10 +40,10 @@ const Applications = () => {
       <h1 className="font-extrabold text-2xl m-4">Başvurular</h1>
       <div id="aplications" className="flex flex-col gap-y-6 w-full">
         {applications.length > 0 ? (
-          applications.map((application) => (
+          applications.map((application, index) => (
             <div
               id="application"
-              key={application._id}
+              key={index}
               className="flex justify-between items-center border rounded-lg py-4 px-4 w-full"
             >
               <div className="flex justify-center items-center gap-3 h-16">

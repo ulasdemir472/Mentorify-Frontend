@@ -5,7 +5,7 @@ import User from "./user";
 import Billing from "./billing";
 import Password from "./password";
 
-const tabs = ["Profile", "Billing", "Password"];
+const tabs = ["Profil", "Ödeme", "Şifre"];
 
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
