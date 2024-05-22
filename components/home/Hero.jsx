@@ -15,37 +15,30 @@ export default function Hero() {
           />
         </div>
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:py-32">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{" "}
-              <a href="#" className="font-semibold text-indigo-600">
-                <span className="absolute inset-0" aria-hidden="true" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Learn a new skill, launch a project, land your dream career.
+              Yeni bir beceri öğrenin, bir proje başlatın, hayalinizdeki
+              kariyere ulaşın.
             </h1>
             <p className="mt-6 text-sm leading-8 text-gray-600">
-              Want to ace your next job interview? Successfully build your
-              startup? Itching to learn high-demand skills? Work smart with an
-              online mentor or coach by your side to offer expert advice and
-              guidance to match your zeal. Become unstoppable using Mentorify.
+              Bir sonraki iş görüşmenizde başarılı olmak ister misiniz?
+              Girişiminizi başarıyla kurmak mı? Yüksek talep gören becerileri
+              öğrenmek mi istiyorsunuz? Şevkinize uygun uzman tavsiyesi ve
+              rehberlik sunmak için yanınızda çevrimiçi bir mentor veya koçla
+              akıllıca çalışın. Mentorifyı kullanarak durdurulamaz olun.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="/register"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Get started
+                Başlayın
               </a>
               <a
                 href="#"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
-                Learn more <span aria-hidden="true">→</span>
+                Daha fazla öğren <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>

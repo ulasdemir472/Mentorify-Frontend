@@ -2,25 +2,25 @@ import Image from "next/image";
 
 const features = [
   {
-    name: "Find your Mentor",
+    name: "Mentorunu bul",
     description:
       "Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.",
     link: "https://cdn.mentorcruise.com/img/home/icons/mc-logo.svg",
   },
   {
-    name: "Apply for Mentorship",
+    name: "Mentorship için kaydol",
     description:
       "Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.",
     link: "https://cdn.mentorcruise.com/img/home/icons/mc-edit.svg",
   },
   {
-    name: "Level up your skills",
+    name: "Yeteneklerini geliştir",
     description:
       "Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.",
     link: "https://cdn.mentorcruise.com/img/home/icons/mc-rocket.svg",
   },
   {
-    name: "Get a job",
+    name: "Kariyerini ilerlet",
     description:
       "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
     link: "https://www.svgrepo.com/show/45691/briefcase.svg",
@@ -39,9 +39,11 @@ export default function Features() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8 text-white">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7">Learn faster</h2>
+          <h2 className="text-base font-semibold leading-7">
+            Daha hızlı öğren
+          </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-            At your fingertips: a dedicated career coach.
+            Parmaklarınızın ucunda: özel bir kariyer koçu.
           </p>
           <p className="mt-6 text-lg leading-8 text-blue-100">
             Quis tellus eget adipiscing convallis sit sit eget aliquet quis.

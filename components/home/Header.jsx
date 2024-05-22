@@ -17,19 +17,19 @@ const Header = () => {
                 className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-indigo-100 hover:text-slate-900"
                 href="#features"
               >
-                Features
+                Özellikler
               </Link>
               <Link
                 className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-indigo-100 hover:text-slate-900"
                 href="#testimonials"
               >
-                Testimonials
+                Yorumlar
               </Link>
               <Link
                 className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-indigo-100 hover:text-slate-900"
                 href="#pricing"
               >
-                Pricing
+                Fiyatlandırma
               </Link>
             </div>
           </div>
@@ -39,7 +39,7 @@ const Header = () => {
                 className="inline-block rounded-lg px-4 py-2 text-sm bg-indigo-600 text-white hover:bg-indigo-500"
                 href="/login"
               >
-                Sign in
+                Giriş Yap
               </Link>
             </div>
           </div>

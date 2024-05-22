@@ -13,7 +13,7 @@ const tiers = [
     id: "tier-freelancer",
     href: "#",
     price: { monthly: "$15", annually: "$144" },
-    description: "The essentials to provide your best work for clients.",
+    description: "Müşteri tabanınızı genişletmek için temel özellikler.",
     features: [
       "5 products",
       "Up to 1,000 subscribers",
@@ -23,11 +23,11 @@ const tiers = [
     mostPopular: false,
   },
   {
-    name: "Startup",
+    name: "Başlangıç",
     id: "tier-startup",
     href: "#",
     price: { monthly: "$30", annually: "$288" },
-    description: "A plan that scales with your rapidly growing business.",
+    description: "Hızlı büyüme için daha fazla özellik ve destek.",
     features: [
       "25 products",
       "Up to 10,000 subscribers",
@@ -42,7 +42,7 @@ const tiers = [
     id: "tier-enterprise",
     href: "#",
     price: { monthly: "$60", annually: "$576" },
-    description: "Dedicated support and infrastructure for your company.",
+    description: "Şirketinizin büyümesine uygun özellikler ve destek.",
     features: [
       "Unlimited products",
       "Unlimited subscribers",
@@ -67,15 +67,15 @@ export default function Pricing() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-600">
-            Pricing
+            Fiyatlandırma
           </h2>
           <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            Pricing plans for teams of&nbsp;all&nbsp;sizes
+            Her büyüklükteki&nbsp;ekipler&nbsp;için fiyatlandırma planları
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-          Choose an affordable plan that’s packed with the best features for
-          engaging your audience, creating customer loyalty, and driving sales.
+          Kitlenizin ilgisini çekmek, müşteri sadakati oluşturmak ve satışları
+          artırmak için en iyi özelliklerle dolu uygun fiyatlı bir plan seçin.
         </p>
         <div className="mt-16 flex justify-center">
           <RadioGroup
@@ -84,7 +84,7 @@ export default function Pricing() {
             className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
           >
             <RadioGroup.Label className="sr-only">
-              Payment frequency
+              Ödeme sıklığı
             </RadioGroup.Label>
             {frequencies.map((option) => (
               <RadioGroup.Option
@@ -125,7 +125,7 @@ export default function Pricing() {
                 </h3>
                 {tier.mostPopular ? (
                   <p className="rounded-full bg-indigo-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-indigo-600">
-                    Most popular
+                    En popüler
                   </p>
                 ) : null}
               </div>
@@ -150,7 +150,7 @@ export default function Pricing() {
                   "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 )}
               >
-                Buy plan
+                Plan seç
               </a>
               <ul
                 role="list"
