@@ -25,6 +25,7 @@ const LoginForm = ({ children }) => {
     initialValues: {
       email: "",
       password: "",
+      rememberMe: false,
     },
     validationSchema: ValidationSchema,
     onSubmit: async (values) => {
@@ -131,9 +132,10 @@ const LoginForm = ({ children }) => {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
-                  id="remember-me"
-                  name="remember-me"
+                  id="rememberMe"
+                  name="rememberMe"
                   type="checkbox"
+                  onChange={formik.handleChange}
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                 />
                 <label
