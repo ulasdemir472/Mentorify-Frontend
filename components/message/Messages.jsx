@@ -17,7 +17,7 @@ const Messages = () => {
   }, [messages]);
 
   return (
-    <div className="p-5 flex-1 flex gap-5 flex-col w-full overflow-auto">
+    <div className="p-5 flex-1 flex gap-5 flex-col w-full overflow-auto scrollbar-thin scrollbar-thumb-gray scrollbar-track-gray">
       {!loading &&
         messages.length > 0 &&
         messages.map((message) => (

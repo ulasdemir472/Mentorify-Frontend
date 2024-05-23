@@ -36,7 +36,7 @@ const Sidebar = () => {
         );
 
   return (
-    <aside className="flex flex-col w-[20%] h-full overflow-auto">
+    <aside className="flex flex-col w-[20%] h-full overflow-auto scrollbar-thin scrollbar-thumb-gray scrollbar-track-gray">
       <h1 className="p-4 text-bold font-bold">Kişiler</h1>
       <div className="relative">
         <MagnifyingGlassIcon
