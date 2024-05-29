@@ -22,7 +22,7 @@ const Message = ({ message }) => {
     if (!fromMe && !message.isSeen) {
       const markAsSeen = async () => {
         await fetch(
-          `http://localhost:8800/api/v1/messages/messages/${message._id}/seen`,
+          `${process.env.SECRET_API}/api/v1/messages/messages/${message._id}/seen`,
           {
             method: "PATCH",
             headers: {
