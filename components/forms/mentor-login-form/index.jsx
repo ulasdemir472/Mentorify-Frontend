@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const LoginForm = ({ children }) => {
   const { user, setIsAuthenticated, setUser, token, setToken } = useAuth();
@@ -147,12 +148,12 @@ const LoginForm = ({ children }) => {
               </div>
 
               <div className="text-sm leading-6">
-                <a
-                  href="#"
+                <Link
+                  href="/email-sent"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
                   Şifreni mi unuttun?
-                </a>
+                </Link>
               </div>
             </div>
             <div>

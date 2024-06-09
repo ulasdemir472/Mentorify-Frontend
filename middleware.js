@@ -11,6 +11,7 @@ export async function middleware(request) {
     "/messages",
     "/mentor-profile",
     "/wishlist",
+    "/settings",
   ];
 
   // Check if the current path starts with any of the protected paths
