@@ -35,7 +35,7 @@ const Register = () => {
       <div className="flex flex-col justify-center items-center md:w-2/3">
         <div className="w-full flex justify-center mt-10">
           <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign Up
+            Kayıt ol
           </h2>
         </div>
         <Tab.Group>

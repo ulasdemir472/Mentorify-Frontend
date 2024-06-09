@@ -104,7 +104,7 @@ const Dashboard = () => {
             />
           ))
         ) : (
-          <p>No mentors found</p>
+          <p>Mentor bulunamadı</p>
         )}
       </div>
       <Pagination

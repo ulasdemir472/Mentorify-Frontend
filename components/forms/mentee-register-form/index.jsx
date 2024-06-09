@@ -73,13 +73,13 @@ const MenteeRegisterForm = ({ children }) => {
       <div className="mx-auto w-full max-w-sm lg:w-96">
         <div>
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
-            <TextInput formik={formik} name="name" label="Name" />
+            <TextInput formik={formik} name="name" label="İsim" />
             {formik.errors[`name`] && formik.touched[`name`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`name`])}
               </span>
             )}
-            <TextInput formik={formik} name="surname" label="Surname" />
+            <TextInput formik={formik} name="surname" label="Soyisim" />
             {formik.errors[`surname`] && formik.touched[`surname`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`surname`])}
@@ -95,7 +95,7 @@ const MenteeRegisterForm = ({ children }) => {
               <TextInput
                 formik={formik}
                 name="password"
-                label="Password"
+                label="Şifre"
                 type={passType ? "password" : "text"}
               />
               <div
@@ -147,14 +147,14 @@ const MenteeRegisterForm = ({ children }) => {
               )}
             </div>
 
-            <TextAreaInput formik={formik} name="desc" label="Description" />
+            <TextAreaInput formik={formik} name="desc" label="Açıklama" />
             {formik.errors[`desc`] && formik.touched[`desc`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`desc`])}
               </span>
             )}
             <GenericButton type="submit" className="w-full">
-              Sign up
+              Kayıt ol
             </GenericButton>
           </form>
         </div>

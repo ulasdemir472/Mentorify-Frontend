@@ -166,13 +166,13 @@ const MentorRegisterForm = ({ children }) => {
                 />
               )}
             </label>
-            <TextInput formik={formik} name="name" label="Name" />
+            <TextInput formik={formik} name="name" label="İsim" />
             {formik.errors[`name`] && formik.touched[`name`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`name`])}
               </span>
             )}
-            <TextInput formik={formik} name="surname" label="Surname" />
+            <TextInput formik={formik} name="surname" label="Soyisim" />
             {formik.errors[`surname`] && formik.touched[`surname`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`surname`])}
@@ -188,7 +188,7 @@ const MentorRegisterForm = ({ children }) => {
               <TextInput
                 formik={formik}
                 name="password"
-                label="Password"
+                label="Şifre"
                 type={passType ? "password" : "text"}
               />
               <div
@@ -239,14 +239,14 @@ const MentorRegisterForm = ({ children }) => {
                 </span>
               )}
             </div>
-            <SelectCategory formik={formik} label="Select Category" />
+            <SelectCategory formik={formik} label="Kategori Seç" />
             <TagsWithBadges
               name="interests"
               formik={formik}
-              label="Sub Category"
+              label="Alt Kategorileri Seç"
               placeholder="Select Sub Category"
             />
-            <TextInput formik={formik} name="github" label="Github Profile" />
+            <TextInput formik={formik} name="github" label="Github Profil" />
             {formik.errors[`github`] && formik.touched[`github`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`github`])}
@@ -255,7 +255,7 @@ const MentorRegisterForm = ({ children }) => {
             <TextInput
               formik={formik}
               name="linkedIn"
-              label="LinkedIn Profile"
+              label="LinkedIn Profil"
             />
             {formik.errors[`linkedIn`] && formik.touched[`linkedIn`] && (
               <span className="error-message text-xs text-red-500">
@@ -265,14 +265,18 @@ const MentorRegisterForm = ({ children }) => {
             <TextInput
               formik={formik}
               name="jobTitle"
-              label="Job Title with Company"
+              label="Şirket ile beraber çalıştığın pozisyon"
             />
             {formik.errors[`jobTitle`] && formik.touched[`jobTitle`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`jobTitle`])}
               </span>
             )}
-            <NumberInput formik={formik} name="price" label="Price per month" />
+            <NumberInput
+              formik={formik}
+              name="price"
+              label="İstenilen aylık Mentor ücreti"
+            />
             {formik.errors[`price`] && formik.touched[`price`] && (
               <span className="error-message text-xs text-red-500">
                 {String(formik.errors[`price`])}
@@ -281,11 +285,11 @@ const MentorRegisterForm = ({ children }) => {
             <TextAreaInput
               formik={formik}
               name="desc"
-              label="Description"
+              label="Açıklama"
               placeholder="Talk about yourself..."
             />
             <GenericButton type="submit" className="w-full">
-              Sign up
+              Kayıt ol
             </GenericButton>
           </form>
         </div>

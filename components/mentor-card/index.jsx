@@ -98,7 +98,7 @@ const MentorCard = ({ mentor, currentUser }) => {
           {hasHalfStar && <HalfStar />}
           <span className="text-black font-md text-sm">
             <span className="font-bold">{mentor.rating}</span> (
-            {mentor?.reviews?.length} reviews)
+            {mentor?.reviews?.length} inceleme)
           </span>
         </div>
         <p className="my-6 text-sm leading-6 font-normal">{mentor.desc}</p>
@@ -113,16 +113,14 @@ const MentorCard = ({ mentor, currentUser }) => {
         </div>
         <div className="flex flex-col gap-5 lg:gap-10 lg:w-full lg:flex-row lg:h-14">
           <div className="flex flex-col w-1/3">
-            <span className="text-gray-500 font-medium text-sm">
-              Starting from
-            </span>
+            <span className="text-gray-500 font-medium text-sm">Fiyat</span>
             <span className="font-bold text-2xl">{mentor.price}₺/ay</span>
           </div>
           <Link
             href={`/mentor-profile/${mentor._id}`}
             className="bg-indigo-500 w-full text-white flex items-center justify-center py-2 px-4 rounded-lg"
           >
-            View Profile
+            Profile git
           </Link>
 
           {currentUser?.wishlist?.includes(mentor._id) ? (
@@ -130,7 +128,7 @@ const MentorCard = ({ mentor, currentUser }) => {
               onClick={removeWishlist}
               className="text-indigo-500 bg-white w-full border border-indigo-500 rounded-lg py-2 px-3 hover:bg-red-500 hover:text-white hover:border-red-500"
             >
-              Remove
+              İstek listesinden çıkar
             </button>
           ) : (
             <GenericButton
@@ -141,7 +139,7 @@ const MentorCard = ({ mentor, currentUser }) => {
               onClick={addWishlist}
               //disabled={currentUser?.wishlist.includes(mentor._id) ? true : false}
             >
-              Add to Wishlist
+              İstek listesine ekle
             </GenericButton>
           )}
         </div>

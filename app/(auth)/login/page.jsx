@@ -34,7 +34,7 @@ const Login = () => {
       <div className="flex flex-col justify-center items-center md:w-2/3">
         <div className="w-full flex justify-center mt-10">
           <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Hesabına giriş yap
           </h2>
         </div>
         <Tab.Group>
@@ -66,21 +66,21 @@ const Login = () => {
               <MenteeLoginForm>
                 <div className="w-full flex items-center mt-3 flex-col text-sm gap-1">
                   <span className="w-full flex justify-start text-slate-500">
-                    Don’t have an account?
+                    Hesabın yok mu?
                   </span>
                   <span className="w-full flex justify-start gap-1">
                     <Link
                       href="/register"
                       className=" text-indigo-700 font-semibold underline"
                     >
-                      Sign up as a mentee
+                      Mentee olarak kaydol
                     </Link>
-                    or
+                    veya
                     <Link
                       href="/register"
                       className=" text-indigo-700 font-semibold underline"
                     >
-                      apply to be a mentor
+                      mentor olmak için başvur
                     </Link>
                   </span>
                 </div>
@@ -90,21 +90,21 @@ const Login = () => {
               <MentorLoginForm>
                 <div className="w-full flex items-center mt-3 flex-col text-sm gap-1">
                   <span className="w-full flex justify-start text-slate-500">
-                    Don’t have an account?
+                    Hesabın yok mu?
                   </span>
                   <span className="w-full flex justify-start gap-1">
                     <Link
                       href="/register"
                       className=" text-indigo-700 font-semibold underline"
                     >
-                      Sign up as a mentee
+                      mentee olarak kaydol
                     </Link>
-                    or
+                    veya
                     <Link
                       href="/register"
                       className=" text-indigo-700 font-semibold underline"
                     >
-                      apply to be a mentor
+                      mentor olmak için başvur
                     </Link>
                   </span>
                 </div>

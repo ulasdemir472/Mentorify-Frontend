@@ -77,7 +77,7 @@ const LoginForm = ({ children }) => {
               <TextInput
                 formik={formik}
                 name="password"
-                label="Password"
+                label="Şifre"
                 type={passType ? "password" : "text"}
               />
               <div
@@ -142,7 +142,7 @@ const LoginForm = ({ children }) => {
                   htmlFor="remember-me"
                   className="ml-3 block text-sm leading-6 text-gray-700"
                 >
-                  Remember me
+                  Beni hatırla
                 </label>
               </div>
 
@@ -151,13 +151,13 @@ const LoginForm = ({ children }) => {
                   href="#"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
-                  Forgot password?
+                  Şifreni mi unuttun?
                 </a>
               </div>
             </div>
             <div>
               <GenericButton type="submit" className="w-full text-md">
-                Login
+                Giriş yap
               </GenericButton>
             </div>
           </form>
