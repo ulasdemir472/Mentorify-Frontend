@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { cn } from "@/utils/utils";
 import Image from "next/image";
+import { useUserStore } from "@/zustand/userStore";
+import { useAuth } from "@/contexts/AuthContext";
 
-const Dropdown = ({ user }) => {
+const Dropdown = () => {
+  const { user } = useAuth();
+  const { currentUser, fetchUserInfo } = useUserStore();
+  useEffect(() => {
+    if (user?.id) {
+      fetchUserInfo(user.id, user.role.toLowerCase());
+    }
+  }, []);
   return (
     <Menu as="div" className="relative ml-3">
       <div>
@@ -15,7 +24,7 @@ const Dropdown = ({ user }) => {
             height={60}
             width={60}
             className="rounded-full h-10 object-cover"
-            src={user?.image || "/avatar.png"}
+            src={currentUser?.image || "/avatar.png"}
             alt="profile image"
           />
         </Menu.Button>
@@ -34,8 +43,8 @@ const Dropdown = ({ user }) => {
             {({ active }) => (
               <a
                 href={
-                  user.__t === "Mentor"
-                    ? `/mentor-profile/${user._id}`
+                  user.role === "Mentor"
+                    ? `/mentor-profile/${user.id}`
                     : "/profile"
                 }
                 className={cn(

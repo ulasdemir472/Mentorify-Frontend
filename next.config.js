@@ -6,6 +6,7 @@ const nextConfig = {
       "i.pravatar.cc",
       "localhost",
       "mentorify-backend.onrender.com",
+      "picsum.photos",
     ],
   },
   env: {

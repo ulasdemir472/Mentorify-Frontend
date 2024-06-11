@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Logo from "@/public/logo.svg";
 import GenericButton from "@/components/generic-button";
 import Cookies from "js-cookie";
 import { usePathname } from "next/navigation";
 import Dropdown from "../dropdown";
-import { useUserStore } from "@/zustand/userStore";
 import { useAuth } from "@/contexts/AuthContext";
 
 const tabs = [
@@ -25,7 +24,6 @@ const Navbar = () => {
   };
 
   const { user } = useAuth();
-  const { currentUser } = useUserStore();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const pathname = usePathname();
@@ -89,7 +87,7 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="flex gap-3 ml-auto">
-          <Dropdown user={currentUser} />
+          <Dropdown />
           <GenericButton type="button" onClick={() => logout()}>
             Çıkış
           </GenericButton>

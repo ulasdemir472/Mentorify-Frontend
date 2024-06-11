@@ -44,6 +44,11 @@ const User = () => {
   }, []);
 
   const handleSubmit = async (values) => {
+    if (user.role === "Mentee") {
+      delete values.price;
+      delete values.jobTitle;
+    }
+
     Object.keys(values).forEach((key) => {
       if (
         values[key] === "" ||
