@@ -5,7 +5,7 @@ import User from "./user";
 import Billing from "./billing";
 import Password from "./password";
 
-const tabs = ["Profil", "Ödeme", "Şifre"];
+const tabs = ["Profil", "Şifre"];
 
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -42,9 +42,9 @@ const Profile = () => {
               <User />
             </div>
           </Tab.Panel>
-          <Tab.Panel className="w-full max-w-screen-lg xl:mx-auto">
+          {/* <Tab.Panel className="w-full max-w-screen-lg xl:mx-auto">
             <Billing />
-          </Tab.Panel>
+          </Tab.Panel> */}
           <Tab.Panel className="w-full max-w-screen-lg xl:mx-auto">
             <Password />
           </Tab.Panel>

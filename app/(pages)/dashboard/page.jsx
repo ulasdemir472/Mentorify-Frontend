@@ -196,11 +196,13 @@ const Dashboard = () => {
                     </svg>
                     AI ile Mentor öner
                   </button>
-                ) : (
+                ) : user.role === "Mentee" ? (
                   <span className="py-2 px-4 bg-red-500 text-white rounded-lg">
                     Yapay Zeka ile mentor önermesi için lütfen profilinizi
                     doldurun!
                   </span>
+                ) : (
+                  ""
                 )}
               </div>
             </div>

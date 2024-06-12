@@ -11,6 +11,14 @@ export default function Comboboxy(props) {
   const [options, setOptions] = useState([
     "Yazılım",
     "Mekatronik",
+    "Hukuk",
+    "Müzik",
+    "Yemek",
+    "Edebiyat",
+    "Teknoloji",
+    "Sanat",
+    "Sağlık",
+    "Spor",
     "Elektrik",
     "Makine",
     "Endüstri",
@@ -23,7 +31,7 @@ export default function Comboboxy(props) {
     "Biyomedikal",
     "Çevre",
     "İşletme",
-    "Mim",
+    "Mimar",
   ]);
   const [query, setQuery] = useState("");
   const [selectedOption, setSelectedOption] = useState("");

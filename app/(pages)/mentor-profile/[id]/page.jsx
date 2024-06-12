@@ -38,7 +38,6 @@ const MentorProfile = () => {
   };
 
   useEffect(() => {
-    if (!mentor.image) return (window.location.href = "/404");
     getMentor(params.id);
   }, []);
 

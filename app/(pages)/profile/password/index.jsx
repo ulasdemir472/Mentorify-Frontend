@@ -35,7 +35,6 @@ const Password = () => {
 
   const changePassword = async (values) => {
     if (values.password === "") return;
-    console.log(values);
 
     const role = user.role === "Mentor" ? "mentors" : "mentees";
 
@@ -51,7 +50,6 @@ const Password = () => {
       );
 
       const res = await response.json();
-      console.log(res);
 
       if (res) {
         setSendCode(true);
