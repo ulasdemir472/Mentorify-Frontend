@@ -37,7 +37,6 @@ const LoginForm = ({ children }) => {
   const login = async (values) => {
     try {
       const response = await authorize(values);
-      console.log(response);
       if (response.status) {
         setIsAuthenticated(true);
         setUser(response.user);
@@ -49,9 +48,6 @@ const LoginForm = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      console.log("USER ", user);
-      console.log("TOKEN ", token);
     }
   };
 

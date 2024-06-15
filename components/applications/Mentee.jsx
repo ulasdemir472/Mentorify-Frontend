@@ -23,7 +23,6 @@ const Applications = () => {
       );
 
       const data = await response.json();
-      console.log(data);
       setApplications(data.data);
     } catch (error) {
       console.log(error);

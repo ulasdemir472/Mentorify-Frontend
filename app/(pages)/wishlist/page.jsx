@@ -17,7 +17,6 @@ const Wishlist = () => {
         }
       );
       const res = await response.json();
-      console.log(res);
       if (res.success) {
         setWishlist(res.data);
       }
@@ -35,7 +34,7 @@ const Wishlist = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
+
       if (data.success) {
         toast.success("Removed from wishlist");
         setWishlist(wishlist.filter((mentor) => mentor._id !== mentorId));

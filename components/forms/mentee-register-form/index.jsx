@@ -56,11 +56,9 @@ const MenteeRegisterForm = ({ children }) => {
 
       const data = await response.json();
       if (data.success) {
-        console.log(data);
         toast.success("Registration successful", { autoClose: 500 });
         router.push("/login");
       } else {
-        console.log(data);
         toast.error("Registration failed", { autoClose: 500 });
       }
     } catch (error) {

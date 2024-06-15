@@ -97,7 +97,7 @@ const MentorCard = ({ mentor, currentUser }) => {
           ))}
           {hasHalfStar && <HalfStar />}
           <span className="text-black font-md text-sm">
-            <span className="font-bold">{mentor.rating}</span> (
+            <span className="font-bold">{mentor.rating.toFixed(2)}</span> (
             {mentor?.reviews?.length} inceleme)
           </span>
         </div>

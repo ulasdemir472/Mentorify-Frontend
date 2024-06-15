@@ -58,7 +58,6 @@ const User = () => {
         values[key] = currentUser[key] ? currentUser[key] : values[key];
       }
     });
-    console.log(values);
 
     const formData = new FormData();
     Object.keys(values).forEach((key) => {

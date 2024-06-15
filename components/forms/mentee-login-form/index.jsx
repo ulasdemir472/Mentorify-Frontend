@@ -35,7 +35,6 @@ const LoginForm = ({ children }) => {
   const login = async (values) => {
     try {
       const response = await authorizeMentee(values);
-      console.log(response);
       if (response.status) {
         setIsAuthenticated(true);
         setUser(response.user);

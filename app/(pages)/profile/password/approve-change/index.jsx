@@ -44,7 +44,6 @@ const VerificationForm = ({ password, newPassword }) => {
       );
 
       const res = await response.json();
-      console.log(res);
 
       if (res) {
         toast.success("Şifreniz başarıyla değiştirildi.");

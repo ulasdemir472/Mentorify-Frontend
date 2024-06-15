@@ -23,7 +23,6 @@ const EmailSent = () => {
 
   const sentEmail = async (values) => {
     if (values.email === "") return;
-    console.log(values);
 
     try {
       const response = await fetch(`/api/email-sent`, {

@@ -36,7 +36,6 @@ export async function GET(request) {
     }
   );
   const data = await externalResponse.json();
-  console.log(data);
   if (externalResponse.ok) {
     return new Response(JSON.stringify(data));
   } else {

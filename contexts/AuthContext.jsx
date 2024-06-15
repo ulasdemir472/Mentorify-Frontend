@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
       setUser(parsedUser);
       setToken(storedToken);
       setIsAuthenticated(true);
-      console.log("AUTH USER: ", user);
     }
     setLoading(false);
   }, []);

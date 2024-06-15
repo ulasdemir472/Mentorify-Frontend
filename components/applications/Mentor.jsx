@@ -23,7 +23,6 @@ const Applications = () => {
       );
 
       const data = await response.json();
-      console.log(data);
       setApplicants(data.applicants);
     } catch (error) {
       console.log(error);
@@ -44,11 +43,12 @@ const Applications = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
-      toast.success("Başvuru onaylandı.");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      if (data.success) {
+        toast.success("Başvuru onaylandı.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
     } catch (error) {
       console.log(error);
     }

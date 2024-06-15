@@ -2,7 +2,6 @@ import React from "react";
 import { toast } from "react-toastify";
 
 const MentorPrice = ({ mentor, currentUser }) => {
-  console.log(currentUser);
   const applyToMentor = async () => {
     try {
       const response = await fetch(
@@ -18,7 +17,6 @@ const MentorPrice = ({ mentor, currentUser }) => {
       );
 
       const data = await response.json();
-      console.log(data);
       if (data.success) {
         toast.success(
           "Başvurunuz alındı. Mentorunuz en kısa sürede size dönüş yapacak."

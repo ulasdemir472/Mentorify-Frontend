@@ -32,7 +32,6 @@ const ForgotPassword = () => {
 
   const changePassword = async (values) => {
     if (values.password === "" || values.email === "") return;
-    console.log(values);
 
     try {
       const response = await fetch(`/api/forgot-password`, {

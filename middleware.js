@@ -26,7 +26,6 @@ export async function middleware(request) {
     : NextResponse.redirect(`${protocol}//${host}/login`);
 
   const isValidToken = await validateToken(token);
-  //console.log(isValidToken);
 
   if (isProtectedPath) {
     if (!isValidToken) {

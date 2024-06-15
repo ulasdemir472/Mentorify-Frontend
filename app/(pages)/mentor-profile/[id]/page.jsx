@@ -26,7 +26,7 @@ const MentorProfile = () => {
         },
       });
       const data = await response.json();
-      console.log(data.data);
+
       setMentor(data.data);
       if (user?.id) {
         await fetchUserInfo(user.id, user.role.toLowerCase());

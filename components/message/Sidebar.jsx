@@ -29,10 +29,8 @@ const Sidebar = () => {
   const filteredUsers =
     query === ""
       ? chatUsers
-      : chatUsers.filter(
-          (user) =>
-            user?.name.toLowerCase().includes(query.toLowerCase()) ||
-            user?.surname.toLowerCase().includes(query.toLowerCase())
+      : chatUsers.filter((user) =>
+          user?.name.toLowerCase().includes(query.toLowerCase())
         );
 
   return (

@@ -33,7 +33,7 @@ const Dashboard = () => {
           throw new Error("Failed to fetch mentors");
         }
         const data = await response.json();
-        console.log(data);
+
         if (data.success) {
           setMentors(data.data);
           setLoading(false);
@@ -49,8 +49,6 @@ const Dashboard = () => {
 
     fetchMentors();
   }, [user, fetchUserInfo]);
-
-  console.log("currentUser : ", currentUser);
 
   const filteredMentors =
     input === ""
@@ -88,7 +86,6 @@ const Dashboard = () => {
 
       const res = await response.json();
       if (res) {
-        console.log(res);
         setMentors(res);
       }
     } catch (error) {
