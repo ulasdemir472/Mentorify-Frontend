@@ -1,4 +1,4 @@
-import { Inter, Roboto, Open_Sans } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import { ToastContainer } from "react-toastify";
