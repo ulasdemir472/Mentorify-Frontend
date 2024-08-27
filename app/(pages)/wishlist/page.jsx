@@ -66,7 +66,11 @@ const Wishlist = () => {
                     <Image
                       height={36}
                       width={36}
-                      src={mentor.image || "/avatar.png"}
+                      src={
+                        mentor.image.includes("localhost")
+                          ? "/avatar.png"
+                          : mentor.image
+                      }
                       alt="Alessandro Liparoti"
                       className="inline rounded-full mr-2 align-bottom"
                     />

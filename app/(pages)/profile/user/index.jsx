@@ -164,7 +164,11 @@ const User = () => {
               />
             ) : currentUser ? (
               <Image
-                src={currentUser?.image || "/avatar.png"}
+                src={
+                  currentUser?.image.includes("localhost")
+                    ? "/avatar.png"
+                    : currentUser?.image
+                }
                 width={144}
                 height={144}
                 alt="profile photo"

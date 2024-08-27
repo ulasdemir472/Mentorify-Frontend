@@ -47,7 +47,11 @@ const Applications = () => {
             >
               <div className="flex justify-center items-center gap-3 h-16">
                 <Image
-                  src={application.image || "/avatar.png"}
+                  src={
+                    application.image.includes("localhost")
+                      ? "/avatar.png"
+                      : application.image
+                  }
                   alt="avatar"
                   width={50}
                   height={50}

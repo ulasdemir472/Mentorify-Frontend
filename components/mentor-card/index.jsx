@@ -68,7 +68,9 @@ const MentorCard = ({ mentor, currentUser }) => {
     <div className="border py-8 px-7 flex flex-col md:flex md:flex-row rounded-lg w-full md:w-[56rem] gap-3">
       <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-full md:w-1/3 group">
         <Image
-          src={mentor.image || "/avatar.png"}
+          src={
+            mentor.image.includes("localhost") ? "/avatar.png" : mentor.image
+          }
           alt="mentor"
           width={200}
           height={300}
