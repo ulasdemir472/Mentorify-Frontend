@@ -78,7 +78,7 @@ const User = () => {
       formData.append("image", values.image);
     }
 
-    const role = user.role === "Mentor" ? "mentors" : "mentees";
+    const role = (await user.role) === "Mentor" ? "mentors" : "mentees";
 
     try {
       const response = await fetch(`/api/${role}?id=${user.id}&role=${role}`, {
@@ -164,11 +164,7 @@ const User = () => {
               />
             ) : currentUser ? (
               <Image
-                src={
-                  currentUser?.image.includes("localhost")
-                    ? "/avatar.png"
-                    : currentUser?.image
-                }
+                src={currentUser?.image || "./avatar.png"}
                 width={144}
                 height={144}
                 alt="profile photo"

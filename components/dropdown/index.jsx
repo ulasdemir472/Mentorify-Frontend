@@ -24,11 +24,7 @@ const Dropdown = () => {
             height={60}
             width={60}
             className="rounded-full h-10 object-cover"
-            src={
-              currentUser?.image.includes("localhost")
-                ? "/avatar.png"
-                : currentUser?.image
-            }
+            src={currentUser?.image || "/avatar.png"}
             alt="profile image"
           />
         </Menu.Button>
