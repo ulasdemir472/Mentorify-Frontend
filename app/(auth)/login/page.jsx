@@ -15,7 +15,7 @@ function cn(...classes) {
 const Login = () => {
   return (
     <div className="w-full min-h-screen flex flex-col md:flex-row">
-      <div className="w-full md:block md:w-1/3">
+      <div className="hidden md:block md:w-1/3">
         <section className="w-full h-full bg-indigo-900 min-h-screen flex">
           <div className="m-auto">
             <Link className="w-full" href="/" aria-label="Home">
@@ -97,7 +97,7 @@ const Login = () => {
                       href="/register"
                       className=" text-indigo-700 font-semibold underline"
                     >
-                      mentee olarak kaydol
+                      Mentee olarak kaydol
                     </Link>
                     veya
                     <Link

@@ -34,7 +34,7 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
-            <div className="hidden md:block">
+            <div className="md:block">
               <Link
                 className="inline-block rounded-lg px-4 py-2 text-sm bg-indigo-600 text-white hover:bg-indigo-500"
                 href="/login"

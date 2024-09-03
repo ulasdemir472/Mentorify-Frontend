@@ -16,7 +16,7 @@ function cn(...classes) {
 const Register = () => {
   return (
     <div className="w-full min-h-screen flex flex-col md:flex-row">
-      <div className="w-full sm:block sm:w-1/3">
+      <div className="hidden md:block md:w-1/3">
         <section className="w-full h-full bg-indigo-900 min-h-screen flex">
           <div className="m-auto">
             <Link className="w-full" href="/" aria-label="Home">
