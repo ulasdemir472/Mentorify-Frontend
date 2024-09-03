@@ -86,7 +86,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="flex gap-3 ml-auto">
+        <div className="flex gap-3 ml-auto w-full justify-end">
           <Dropdown />
           <GenericButton type="button" onClick={() => logout()}>
             Çıkış

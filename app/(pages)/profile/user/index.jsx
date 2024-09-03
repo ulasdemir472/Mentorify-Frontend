@@ -147,7 +147,7 @@ const User = () => {
           </div>
         </div>
         <form
-          className="space-y-6 grid grid-cols-2 gap-4 mt-4 mr-40"
+          className="space-y-6 grid grid-cols-2 gap-4 mt-4 md:mr-40"
           onSubmit={formik.handleSubmit}
         >
           <label htmlFor="image" className="col-span-2">

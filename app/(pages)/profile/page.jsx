@@ -15,7 +15,7 @@ const Profile = () => {
   return (
     <div className="w-full min-h-screen">
       <Tab.Group>
-        <div className="hidden sm:flex px-[7.5rem] py-4 shadow-md w-full">
+        <div className="sm:flex px-[7.5rem] py-4 shadow-md w-full">
           <nav className="flex" aria-label="Tabs">
             <Tab.List className="flex w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 gap-8">
               {tabs.map((tab) => (
