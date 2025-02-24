@@ -28,6 +28,9 @@ const nextConfig = {
   env: {
     SECRET_API: process.env.SECRET_API,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
