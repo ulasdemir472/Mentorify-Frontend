@@ -23,6 +23,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
       },
+      {
+        protocol: "https",
+        hostname: `${process.env.SECRET_API}`,
+      }
     ],
   },
   env: {

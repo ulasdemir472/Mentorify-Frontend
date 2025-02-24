@@ -16,7 +16,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const socket = io("http://localhost:8800", {
+      const socket = io(process.env.SECRET_API, {
         query: {
           userId: user.id,
         },
