@@ -24,8 +24,8 @@ const MainFooter = () => {
             </p>
             <div className="flex space-x-6">
               <a
-                href="https://facebook.com/mentorcruise/"
-                title="MentorCruise Facebook"
+                href="#"
+                title="Mentorify Facebook"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gray-400 hover:text-gray-500"
@@ -45,8 +45,8 @@ const MainFooter = () => {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/mentorcruise/"
-                title="MentorCruise Instagram"
+                href="#"
+                title="Mentoify Instagram"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gray-400 hover:text-gray-500"
@@ -66,8 +66,8 @@ const MainFooter = () => {
                 </svg>
               </a>
               <a
-                href="https://twitter.com/mentorcruise/"
-                title="MentorCruise Twitter"
+                href="#"
+                title="Mentorify Twitter"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gray-400 hover:text-gray-500"
@@ -83,8 +83,8 @@ const MainFooter = () => {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/company/mentorcruise/"
-                title="MentorCruise Linkedin"
+                href="#"
+                title="Mentorify Linkedin"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gray-400 hover:text-gray-500"

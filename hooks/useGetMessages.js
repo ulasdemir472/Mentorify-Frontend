@@ -13,7 +13,7 @@ const useGetMessages = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `${process.env.SECRET_API}/api/v1/messages/${selectedConversation._id}/${user.id}`
+          `http://localhost:8800/api/v1/messages/${selectedConversation._id}/${user.id}`
         );
         const data = await res.json();
         if (data.error) throw new Error(data.error);

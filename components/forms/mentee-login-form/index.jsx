@@ -148,14 +148,14 @@ const LoginForm = ({ children }) => {
                 </label>
               </div>
 
-              <div className="text-sm leading-6">
+              {/* <div className="text-sm leading-6">
                 <a
                   href="#"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
                   Şifremi unuttum
                 </a>
-              </div>
+              </div> */}
             </div>
             <div>
               <GenericButton type="submit" className="w-full text-md">
@@ -163,7 +163,7 @@ const LoginForm = ({ children }) => {
               </GenericButton>
             </div>
           </form>
-          <div className="relative my-4" x-show="tab === 'mentee'">
+          {/* <div className="relative my-4" x-show="tab === 'mentee'">
             <div
               className="absolute inset-0 flex items-center"
               aria-hidden="true"
@@ -191,7 +191,7 @@ const LoginForm = ({ children }) => {
                 Google ile devam et
               </span>
             </div>
-          </button>
+          </button> */}
           {children}
         </div>
       </div>

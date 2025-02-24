@@ -37,8 +37,10 @@ const MentorRegisterForm = ({ children }) => {
     interests: Yup.array().min(1, "Select at least one sub category"),
     desc: Yup.string().required("Description is required"),
     image: Yup.mixed().required("Profile image is required"),
-    github: Yup.string().url("Invalid github url"),
-    linkedIn: Yup.string()
+    github: Yup.string()
+      .url("Invalid github url")
+      .required("Github is required"),
+    linkedin: Yup.string()
       .url("Invalid linkedIn url")
       .required("Linkedin is required"),
     price: Yup.number().required("Price is required").min(0),
@@ -56,7 +58,7 @@ const MentorRegisterForm = ({ children }) => {
       desc: "",
       image: undefined,
       github: "",
-      linkedIn: "",
+      linkedin: "",
       price: 0,
       jobTitle: "",
     },

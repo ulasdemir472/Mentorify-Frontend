@@ -1,12 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   images: {
-    domains: [
-      "cdn.mentorcruise.com",
-      "i.pravatar.cc",
-      "localhost",
-      "mentorify-backend.onrender.com",
-      "picsum.photos",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.mentorcruise.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: "mentorify-backend.onrender.com",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
     ],
   },
   env: {

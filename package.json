@@ -1,5 +1,5 @@
 {
-  "name": "mentor-hub",
+  "name": "mentorify",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-toastify": "^10.0.4",
+    "sharp": "^0.33.5",
     "socket.io-client": "^4.7.5",
     "tailwind-merge": "^2.2.1",
     "yup": "^1.3.3",
