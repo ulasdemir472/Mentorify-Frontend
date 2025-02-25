@@ -1,6 +1,6 @@
 export async function POST(request) {
   const reqdata = await request.json();
-  const externalResponse = await fetch("http://localhost:5000/recommend", {
+  const externalResponse = await fetch(`${process.env.FLASK_API}/recommend`, {
     headers: {
       "Content-Type": "application/json",
     },
