@@ -1,60 +1,117 @@
-name: Build and Push Frontend Image
+name: Frontend — Build, Push & Deploy
 
 on:
   push:
     branches:
       - main
-      - 'feature/**'
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:  # Manuel tetikleme desteği
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: ulasdemir472/mentorify-frontend
+  # TODO: Bu URL'yi infra repo URL'inle değiştir
+  INFRA_REPO: ulasdemir472/mentorify-infra
 
 jobs:
-  build:
+  # ─────────────────────────────────────────
+  # Stage 1: Lint & Validate
+  # ─────────────────────────────────────────
+  validate:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Log in to Docker Hub
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+  # ─────────────────────────────────────────
+  # Stage 2: Build & Push Docker Image
+  # ─────────────────────────────────────────
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: validate
+    outputs:
+      image_tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate Semantic Version
+        id: version
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $LATEST_TAG"
+
+          MAJOR=$(echo "$LATEST_TAG" | sed 's/v//' | cut -d. -f1)
+          MINOR=$(echo "$LATEST_TAG" | cut -d. -f2)
+          PATCH=$(echo "$LATEST_TAG" | cut -d. -f3)
+          NEW_TAG="v${MAJOR}.${MINOR}.$((PATCH + 1))"
+
+          echo "tag=${NEW_TAG}" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_TAG"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract Branch Name
-        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+      - name: Build & Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.tag }}
+            ${{ env.IMAGE_NAME }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
-      - name: Get Last Git Tag (Auto Versioning)
-        id: get_version
+      - name: Create Git Tag
         run: |
-          TAG=$(git describe --tags --abbrev=0 || echo "v1.0.0")
-          echo "CURRENT_VERSION=$TAG" >> $GITHUB_ENV
-          echo "Last version: $TAG"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.version.outputs.tag }}
+          git push origin ${{ steps.version.outputs.tag }}
 
-      - name: Generate Next Version
-        id: next_version
-        run: |
-          CURRENT_VERSION="${{ env.CURRENT_VERSION }}"
-          MAJOR=$(echo $CURRENT_VERSION | cut -d. -f1 | sed 's/v//')
-          MINOR=$(echo $CURRENT_VERSION | cut -d. -f2)
-          PATCH=$(echo $CURRENT_VERSION | cut -d. -f3)
-          NEW_VERSION="v$MAJOR.$MINOR.$(($PATCH + 1))"
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-          echo "Next version: $NEW_VERSION"
+  # ─────────────────────────────────────────
+  # Stage 3: Update K8s Manifests (GitOps)
+  # ─────────────────────────────────────────
+  update-manifests:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      - name: Checkout Infra Repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.INFRA_REPO }}
+          token: ${{ secrets.INFRA_REPO_PAT }}
+          ref: main
 
-      - name: Build and Tag Docker Image
+      - name: Update Frontend Image Tag
         run: |
-          docker build -t ulasdemir472/mentorify-frontend:${{ env.NEW_VERSION }} -t ulasdemir472/mentorify-frontend:latest .
+          NEW_TAG="${{ needs.build-and-push.outputs.image_tag }}"
+          sed -i "s|image: ${{ env.IMAGE_NAME }}:.*|image: ${{ env.IMAGE_NAME }}:${NEW_TAG}|g" \
+            apps/frontend/deployment.yaml
 
-      - name: Push Docker Image
-        run: |
-          docker push ulasdemir472/mentorify-frontend:${{ env.NEW_VERSION }}
-          docker push ulasdemir472/mentorify-frontend:latest
+          echo "Updated frontend image to: ${{ env.IMAGE_NAME }}:${NEW_TAG}"
+          cat apps/frontend/deployment.yaml | grep "image:"
 
-      - name: Create New Git Tag
+      - name: Commit & Push
         run: |
-          git tag ${{ env.NEW_VERSION }}
-          git push origin ${{ env.NEW_VERSION }}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps/frontend/deployment.yaml
+          git commit -m "chore(frontend): bump image to ${{ needs.build-and-push.outputs.image_tag }}"
+          git push
