@@ -50,6 +50,16 @@ $ npm run dev
 - Messaging and channel management with Socket io
 - Integrated system with backend code
 
+## 🛠️ Infrastructure & Deployment
+
+This project is deployed using a modern **GitOps** workflow on a **k3s (Kubernetes)** cluster.
+
+- **Zero Trust Security:** Leveraging Cloudflare Tunnels to expose the application without open ports.
+- **GitOps:** Automated deployments via **ArgoCD**.
+- **Secret Management:** Securely handling sensitive data with **Sealed Secrets**.
+- **Infrastructure Code:** All K8s manifests, networking, and security configurations can be found in the dedicated infrastructure repository:
+  👉 **[Mentorify Infrastructure Repository](https://github.com/ulasdemir472/mentorify-infra)**
+
 
 
 # Site
