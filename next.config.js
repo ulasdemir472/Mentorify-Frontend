@@ -13,8 +13,14 @@ const nextConfig = {
       { protocol: "http", hostname: "backend-svc" }
     ],
   },
-  // We no longer inline SECRET_API here to ensure client-side uses relative paths
-  // while server-side reads process.env directly at runtime.
+  async rewrites() {
+    return [
+      {
+        source: '/public/uploads/:path*',
+        destination: `${process.env.SECRET_API}/public/uploads/:path*`,
+      },
+    ];
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
