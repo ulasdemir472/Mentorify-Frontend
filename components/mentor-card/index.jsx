@@ -99,7 +99,7 @@ const MentorCard = ({ mentor, currentUser }) => {
           ))}
           {hasHalfStar && <HalfStar />}
           <span className="text-black font-md text-sm">
-            <span className="font-bold">{mentor.rating.toFixed(2)}</span> (
+            <span className="font-bold">{(mentor.rating || 0).toFixed(1)}</span> (
             {mentor?.reviews?.length} inceleme)
           </span>
         </div>
@@ -116,7 +116,7 @@ const MentorCard = ({ mentor, currentUser }) => {
         <div className="flex flex-col gap-5 lg:gap-10 lg:w-full lg:flex-row lg:h-14">
           <div className="flex flex-col w-1/3">
             <span className="text-gray-500 font-medium text-sm">Fiyat</span>
-            <span className="font-bold text-2xl">{mentor.price}₺/ay</span>
+            <span className="font-bold text-2xl">{mentor.price || 0}₺/ay</span>
           </div>
           <Link
             href={`/mentor-profile/${mentor._id}`}
