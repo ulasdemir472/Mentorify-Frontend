@@ -30,7 +30,7 @@ const VerificationForm = ({ password, newPassword }) => {
     const role = user.role === "Mentor" ? "mentors" : "mentees";
     try {
       const response = await fetch(
-        `${process.env.SECRET_API}/api/v1/${role}/${user.id}/verify-password-update`,
+        `/api/v1/${role}/${user.id}/verify-password-update`,
         {
           method: "PATCH",
           headers: {

@@ -40,7 +40,7 @@ const Password = () => {
 
     try {
       const response = await fetch(
-        `${process.env.SECRET_API}/api/v1/${role}/${user.id}/request-password-update`,
+        `/api/v1/${role}/${user.id}/request-password-update`,
         {
           method: "PATCH",
           headers: {

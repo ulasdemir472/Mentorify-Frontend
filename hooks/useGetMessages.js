@@ -13,7 +13,7 @@ const useGetMessages = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `${process.env.SECRET_API}/api/v1/messages/${selectedConversation._id}/${user.id}`
+          `/api/v1/messages/${selectedConversation._id}/${user.id}`
         );
         const data = await res.json();
         if (data.error) throw new Error(data.error);
@@ -34,7 +34,7 @@ const useGetMessages = () => {
         if (!message.isSeen && message.senderId !== user.id) {
           const markAsSeen = async () => {
             await fetch(
-              `${process.env.SECRET_API}/api/v1/messages/messages/${message._id}/seen`,
+              `/api/v1/messages/messages/${message._id}/seen`,
               {
                 method: "PATCH",
                 headers: {

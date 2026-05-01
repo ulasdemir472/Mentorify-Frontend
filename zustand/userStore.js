@@ -6,9 +6,7 @@ export const useUserStore = create((set) => ({
     if (!id) return set({ currentUser: null });
 
     try {
-      const response = await fetch(
-        `${process.env.SECRET_API}/api/v1/${role}s/${id}`,
-        {
+      const response = await fetch(`/api/v1/${role}s/${id}`, {
           headers: {
             "Content-Type": "application/json",
           },
