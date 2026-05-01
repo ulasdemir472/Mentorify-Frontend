@@ -23,10 +23,10 @@ const MentorPrice = ({ mentor, currentUser }) => {
         );
         window.location.reload();
       } else {
-        toast.error("Başvurunuz alınamadı. Lütfen tekrar deneyin.");
+        toast.error(data.error?.message || "Başvurunuz alınamadı. Lütfen tekrar deneyin.");
       }
     } catch (error) {
-      toast.error("Başvurunuz alınamadı. Lütfen tekrar deneyin.");
+      toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
     }
   };
 
