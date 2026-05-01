@@ -41,8 +41,11 @@ const LoginForm = ({ children }) => {
         setToken(response.token);
         await Cookies.set("session-user", JSON.stringify(response.user));
         await Cookies.set("token", JSON.stringify(response.token));
-        toast.success("Login successful", { autoClose: 500 });
+        toast.success("Login successful", { autoClose: 1000 });
         router.push("/dashboard");
+      } else {
+        // Hata mesajını gösteriyoruz
+        toast.error(response.error?.message || "Login failed", { autoClose: 2000 });
       }
     } catch (error) {
       console.log(error);

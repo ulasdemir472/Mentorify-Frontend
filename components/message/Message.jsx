@@ -37,45 +37,44 @@ const Message = ({ message }) => {
   }, [message, fromMe]);
 
   return (
-    <div className="flex w-full">
-      <div className={"flex flex-col gap-1 w-full " + chatClassName}>
-        <Image
-          className="w-8 h-8 rounded-full"
-          src={
-            fromMe
-              ? currentUser?.image
-                ? currentUser.image
-                : "/avatar.png"
-              : selectedConversation?.image
-              ? selectedConversation.image
-              : "/avatar.png"
-          }
-          alt="Bonnie Green image"
-          width={32}
-          height={32}
-        />
-        <div className={"flex flex-col gap-1 w-full " + chatClassName}>
-          <div
-            className={`flex flex-col w-full max-w-[326px] leading-1.5 p-4 border-gray-200 bg-gray-100 ${
+    <div className={`flex w-full mb-4 animate-in fade-in slide-in-from-bottom-2 duration-300 ${fromMe ? "justify-end" : "justify-start"}`}>
+      <div className={`flex max-w-[80%] md:max-w-[70%] ${fromMe ? "flex-row-reverse" : "flex-row"} items-end gap-2`}>
+        <div className="flex-shrink-0 mb-1">
+          <Image
+            className="w-8 h-8 rounded-full border border-gray-100 shadow-sm object-cover"
+            src={
               fromMe
-                ? "rounded-l-xl rounded-b-xl"
-                : "rounded-e-xl rounded-es-xl"
-            }  ${bubbleBgColor} ${shakeClass}`}
+                ? currentUser?.image || "/avatar.png"
+                : selectedConversation?.image || "/avatar.png"
+            }
+            alt="profile"
+            width={32}
+            height={32}
+          />
+        </div>
+        
+        <div className={`flex flex-col ${fromMe ? "items-end" : "items-start"}`}>
+          <div
+            className={`px-4 py-2.5 shadow-sm ${
+              fromMe
+                ? "bg-indigo-600 text-white rounded-2xl rounded-tr-none"
+                : "bg-white border border-gray-100 text-gray-800 rounded-2xl rounded-tl-none"
+            } ${shakeClass}`}
           >
-            <div className="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-              <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                {fromMe ? "You" : selectedConversation?.name}
-              </span>
-              <span className="text-sm font-normal text-gray-500 dark:text-white">
-                {formattedTime}
-              </span>
-            </div>
-            <p className={`text-md font-normal text-gray-900 dark:text-white`}>
+            <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
               {message.message}
             </p>
-            <span className="text-sm font-normal text-gray-500 dark:text-slate-200">
-              {message.isSeen ? "Seen" : "Delivered"}
+          </div>
+          
+          <div className="flex items-center gap-1.5 mt-1 px-1">
+            <span className="text-[10px] text-gray-400 font-medium uppercase tracking-tighter">
+              {formattedTime}
             </span>
+            {fromMe && (
+              <span className={`text-[10px] font-bold ${message.isSeen ? "text-indigo-500" : "text-gray-300"}`}>
+                {message.isSeen ? "✓✓" : "✓"}
+              </span>
+            )}
           </div>
         </div>
       </div>

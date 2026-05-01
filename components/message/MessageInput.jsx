@@ -49,32 +49,43 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="p-5 flex items-center justify-between mt-auto gap-5 w-full">
-      <div className="flex gap-5">
-        <label htmlFor="file">
-          <CameraIcon className="w-5 h-5 cursor-pointer" alt="" />
+    <div className="p-4 bg-white border-t border-gray-100 flex items-center gap-3">
+      <div className="flex items-center">
+        <label 
+          htmlFor="file" 
+          className="p-2 hover:bg-gray-100 rounded-full cursor-pointer transition-colors text-gray-500 hover:text-indigo-600"
+        >
+          <CameraIcon className="w-6 h-6" />
         </label>
         <input
           type="file"
           id="file"
-          style={{ display: "none" }}
+          className="hidden"
           onChange={handleImg}
         />
       </div>
-      <input
-        type="text"
-        placeholder="Type a message..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        onKeyUp={handleKeyPress}
-        className="flex flex-1 p-2 rounded-lg border outline-none focus:outline-none text-base focus:ring-2 focus:ring-[#5183fe]"
-      />
-      <button
-        className="py-2 px-5 bg-[#5183fe] text-white rounded-md shadow-md border-none transform active:scale-y-75 transition-transform"
-        onClick={handleSend}
-      >
-        Send
-      </button>
+      
+      <div className="flex-1 relative flex items-center">
+        <input
+          type="text"
+          placeholder="Mesajınızı yazın..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyUp={handleKeyPress}
+          className="w-full bg-gray-50 border-none rounded-2xl py-3 px-5 pr-12 focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all text-sm outline-none"
+        />
+        
+        <button
+          className={`absolute right-2 p-2 rounded-xl transition-all duration-200 
+            ${text.trim() ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200 scale-100" : "bg-gray-200 text-gray-400 scale-90 cursor-not-allowed"}`}
+          onClick={handleSend}
+          disabled={!text.trim()}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+            <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 };

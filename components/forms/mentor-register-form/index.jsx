@@ -95,10 +95,10 @@ const MentorRegisterForm = ({ children }) => {
 
       const data = await response.json();
       if (data.success) {
-        toast.success("Registration successful", { autoClose: 500 });
+        toast.success("Registration successful", { autoClose: 1000 });
         router.push("/login");
       } else {
-        toast.error("Registration failed", { autoClose: 500 });
+        toast.error(data.error?.message || "Registration failed", { autoClose: 2000 });
       }
     } catch (error) {
       console.log(error);
