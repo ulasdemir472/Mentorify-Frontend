@@ -129,12 +129,12 @@ const MentorInfo = ({ mentor, currentUser }) => {
                 <span>24 saat içinde cevap</span>
               </span>
             </div>
-            {user.role === "Mentee" && (
+            {user?.role === "Mentee" && (
               <div className="mt-5 flex gap-x-4">
                 <button
                   className="flex border small px-[15px] py-[7px] text-sm rounded-lg hover:bg-slate-100"
                   onClick={
-                    currentUser?.wishlist.includes(mentor._id)
+                    currentUser?.wishlist?.includes(mentor._id)
                       ? removeWishlist
                       : addWishlist
                   }

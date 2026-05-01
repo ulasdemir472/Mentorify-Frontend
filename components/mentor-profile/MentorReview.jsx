@@ -36,8 +36,8 @@ const MentorReview = ({ mentor, currentUser }) => {
   };
 
   useEffect(() => {
-    setReviews(mentor.reviews);
-  }, []);
+    setReviews(mentor.reviews || []);
+  }, [mentor.reviews]);
 
   return (
     <div className="mt-6 md:mb-14" id="reviews">
@@ -49,8 +49,8 @@ const MentorReview = ({ mentor, currentUser }) => {
         </div>
       </div>
       <div id="testimonial_list">
-        {reviews.length > 0 ? (
-          reviews.map((review, index) => (
+        {(reviews || []).length > 0 ? (
+          (reviews || []).map((review, index) => (
             <div
               key={review._id}
               className="py-10 border-0 border-solid border-b border-gray-200"
@@ -58,7 +58,7 @@ const MentorReview = ({ mentor, currentUser }) => {
               <div className="flex text-sm text-gray-500 space-x-4">
                 <div className="flex-none">
                   <Image
-                    src={review.mentee.image || "/avatar.png"}
+                    src={review.mentee?.image || "/avatar.png"}
                     alt="Mentee"
                     width={40}
                     height={40}
@@ -67,12 +67,12 @@ const MentorReview = ({ mentor, currentUser }) => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-medium text-gray-900 inline">
-                    {review.mentee.name} {review.mentee.surname}
+                    {review.mentee?.name} {review.mentee?.surname}
                   </h3>
                   <div className="sm:grid sm:grid-cols-2">
                     <div className="flex gap-x-2">
                       <div className="flex items-center mt-1">
-                        {[...Array(review.rating)].map((_, index) => (
+                        {[...Array(Math.floor(review.rating || 0))].map((_, index) => (
                           <svg
                             key={index}
                             className="text-teal-600 h-5 w-5 flex-shrink-0"
@@ -154,7 +154,7 @@ const MentorReview = ({ mentor, currentUser }) => {
             onClick={(e) => handleReview(e)}
             className="w-[50%]"
             disabled={
-              mentor.approvedMentees?.includes(currentUser._id) ? false : true
+              mentor.approvedMentees?.includes(currentUser?._id) ? false : true
             }
           >
             Gönder
